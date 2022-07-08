@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="39" height="43.5" viewBox="0 0 39 43.5">
+  <g id="paciente" transform="translate(-4.5 -3)">
+    <path id="Caminho_5" data-name="Caminho 5" d="M42,36V31.5a9,9,0,0,0-9-9H15a9,9,0,0,0-9,9V36" transform="translate(0 9)" fill="none" stroke="#4e4e4e" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <path id="Caminho_6" data-name="Caminho 6" d="M30,13.5a9,9,0,1,1-9-9A9,9,0,0,1,30,13.5Z" transform="translate(3)" fill="none" stroke="#4e4e4e" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  </g>
+</svg>

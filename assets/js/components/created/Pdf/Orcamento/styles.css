@@ -1,0 +1,216 @@
+
+.container_pdf {
+    width: 820px;
+    margin: 20px 50px;
+    flex-direction: column;
+    font-family: "DejaVu Sans" !important;
+    transform: scale(1, 1.1);
+}
+
+.header_pdf {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.column_pdf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_pdf {
+    width: 210px;
+}
+
+
+.text_logo {
+    margin-top: 10px;
+    color: #62c1d0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.container_infos {
+    padding: 20px;
+    padding-right: 50px;
+    border: 1px solid #62c1d0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.container_infos .info_text {
+    font-size: 1rem;
+}
+
+.container_infos .customer_name {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+
+.column_info {
+    display: flex;
+    flex-direction: column;
+}
+
+.container_title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px ;
+}
+
+.title_orcamento {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.row_info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 0px 0;
+    justify-content: space-between;
+}
+
+.infos_clinica {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.infos_created {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title_created {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.info_created {
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.label_info {
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(124, 124, 124);
+}
+
+.text_info_clinica {
+    margin-left: 16px;
+}
+
+.separate {
+    width: 100%;
+    border-width: 2px solid black;
+    height: 1px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+.header_table th{
+    border-top: 1px solid #62c1d0;
+    border-bottom: 1px solid #62c1d0;
+    padding: 5px 0;  
+    font-size: 10px;
+}
+
+.tr_especialidade {
+    font-size: 12px;
+}
+
+.footer_table {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* border-top: 1px solid #62c1d0;
+    border-bottom: 1px solid #62c1d0; */
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.container_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container_signature {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signature {
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+.signatures {
+    display: flex;
+    justify-content: space-around;
+}
+
+.container_title_especialidade {
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.container_title_especialidade span {
+    font-size: 12px;
+}
+
+.separate_table {
+    margin: 10px 0;
+}
+
+.space {
+    padding: 5px;
+}
+
+.space_total {
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.label_valor_total {
+    margin-left: 10px;
+}
+
+.total_container {
+    margin-top: 10px;
+    background-color: rgb(44, 34, 120);
+    padding: 5px 15px;
+    padding-left: 50px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.line_divider {
+    padding-top: 5px;
+    border-bottom: 1px solid #c4c4c4;
+}

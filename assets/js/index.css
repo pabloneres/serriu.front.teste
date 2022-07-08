@@ -1,0 +1,73 @@
+.separate {
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin: 30px 0;
+    border-color: #c4c4c4;
+}
+
+.ant-menu-submenu-arrow {
+    display: none;
+}
+
+.aside-menu .ant-menu-title-content {
+    display: none !important;
+}
+
+.aside {
+    z-index: 99999 !important;
+}
+
+.ant-table-thead>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+.ant-table-tbody>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+.ant-table-thead>tr:hover:not(.ant-table-expanded-row)>td,
+.ant-table-tbody>tr:hover:not(.ant-table-expanded-row)>td {
+    background: unset !important;
+}
+
+.entrada-color {
+    background-color: rgb(180, 255, 180);
+}
+
+.saida-color {
+    background-color: rgb(255, 174, 174);
+}
+
+.ant-table-thead>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+.ant-table-tbody>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+.ant-table-thead>tr:hover:not(.ant-table-expanded-row)>td,
+.ant-table-tbody>tr:hover:not(.ant-table-expanded-row)>td {
+    background: unset !important;
+}
+
+.entrada-color {
+    background-color: rgb(180, 255, 180);
+}
+
+.saida-color {
+    background-color: rgb(255, 174, 174);
+}
+
+.divergente-color {
+    background-color: rgb(255, 239, 151);
+}
+
+.pendente-color {
+    background-color: rgb(255, 241, 161);
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+.legends {
+    display: flex;
+    flex-direction: column;
+}
+
+.row-legend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

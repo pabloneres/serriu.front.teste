@@ -1,0 +1,260 @@
+.dx-scheduler-date-table .dx-scheduler-date-table-row {
+  max-width: 10px !important;
+}
+
+.dx-scheduler-date-table-cell,
+.dx-scheduler-time-panel-cell {
+  height: 35px;
+}
+
+.dx-scheduler-appointment-content {
+  padding: 0;
+  border-radius: 10px;
+}
+
+
+.dx-scheduler-time-panel-cell > div {
+  font-size: 11px;
+}
+
+.appointament_render {
+  border-radius: 10px;
+  padding: 5px; 
+  width: 100%;
+  height: 100%;
+  flex: 1; 
+  white-space: normal;
+  border: 2px solid rgb(187, 187, 187);
+  border-left: 10px solid;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+}
+
+.appointament_render_name {
+  display: flex;
+  flex-direction: column ;
+}
+
+.appointament_render_name_hour {
+  font-size: 12px;
+}
+
+.status_circle {
+  padding: 5%;
+  border-radius: 50%;
+}
+
+.teste ::after {
+    height: 10px;
+    width: 10px;
+    border-radius: 10px;
+    background-color: blueviolet;
+    content: " ";
+}
+
+.header-popover {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row-popover {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 10px 8px;
+}
+
+.row-popover-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 8px;
+  padding-bottom: 15px;
+}
+
+.row-popover span + span {
+  margin-left: 50px;
+}
+
+.row-wrapper {
+  margin-top: 15px;
+}
+
+.row-wrapper span.title{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.container_row {
+  display: flex;
+  flex-direction: column;
+}
+
+.select_agenda {
+  width: 250px;
+  z-index: 10;
+}
+
+.select_status {
+  width: 190px;
+  z-index: 10;
+  padding: 5px;
+}
+
+.container_horas {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card_data {
+  margin: 30px 0; 
+}
+
+.container_horas {
+  margin: 10px 0;
+}
+
+.button-select {
+  padding: 10px 15px;
+  border: 1px rgba(0, 0, 0, 0.493) solid;
+  border-radius: 5px;
+  margin: 3px 0;
+  font-weight: bold;
+}
+
+.button-select:hover {
+  background-color: rgb(115, 162, 248);
+  cursor: pointer;
+}
+
+.active {
+  background-color: #161622;
+  color: white;
+}
+
+.disabled {
+  background-color: rgb(196, 196, 196);
+  opacity: .5;
+  cursor: default !important;
+}
+
+.dx-scheduler-date-table-scrollable .dx-scrollable-content {
+  cursor: default;
+}
+
+.disable-collumn-date {
+}
+
+.disable-date {
+  background-color: rgba(216, 216, 216, 0.253);
+  width: 100%;
+  height: 100%;
+}
+
+/* .dx-scheduler-header-panel {
+  margin-bottom: 10px !important;
+} */
+
+.circle-today {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: rgb(0, 109, 252);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.date_render_header {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.date-render-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+span.paciente-code {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.render_status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dx-scheduler-appointment-vertical {
+  border-radius: 10px !important;
+  background-color: transparent !important;
+}
+
+.dx-scheduler-header-panel-cell.dx-scheduler-header-panel-current-time-cell::before {
+  display: none !important;
+}
+
+.dx-scheduler-header-panel-cell {
+  padding: 5px 0;
+}
+
+.dx-scheduler-work-space:not(.dx-scheduler-work-space-all-day) .dx-scheduler-all-day-title-hidden {
+  border: 0;
+}
+
+.modal_button_save {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.drawer_container {
+  padding: 0 20px;
+  max-width: 600px;
+  min-width: 600px;
+}
+
+.drawer_container_details {
+  padding: 20px;
+  max-width: 600px;
+  min-width: 600px;
+}
+
+.drawer_header {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawer_title {
+  font-size: 16px;
+}
+
+
+.select_update {
+  width: 50%;
+  /* padding-left: 10%; */
+}
+
+.teste-option {
+  font-weight: bold;
+}

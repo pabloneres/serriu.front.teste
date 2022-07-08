@@ -1,0 +1,43 @@
+@import '../vars';
+
+.page-home {
+	.site-content {
+		.site-content-inner {
+			.page-content {
+				.page-title {
+					margin-bottom:30px;
+				}
+				.cards {
+					.groupData {
+						margin-bottom:30px;
+						.ant-row-flex {
+							.ant-col {
+								margin-bottom:16px;
+							}
+						}
+						.ant-card {
+							height:100%;
+							&[data-has-link] {
+								&:hover {
+									cursor:pointer;
+									border-color:$primary-color;
+									box-shadow:0 0 10px rgba(0, 208, 137, 0.2);
+								}
+							}
+							h3 {
+								overflow:hidden;
+								white-space:nowrap;
+								text-overflow:ellipsis;
+							}
+							.numberTotal {
+								font-weight:700;
+								font-size:30px;
+								color:#333;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+.page-error-404 {
+	&.page-error-404-public {
+		.site-content {
+			display:flex;
+			.site-content-inner {
+				flex:1;
+				justify-content:center;
+			}
+		}
+	}
+	.site-content {
+		.site-content-inner {
+			display:flex;
+			align-items:center;
+			.page-content {
+				text-align:center;
+				.icon {
+					margin:0 auto 50px;
+					width:184px;
+				}
+			}
+		}
+	}
+}

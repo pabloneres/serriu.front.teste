@@ -1,0 +1,198 @@
+.listaNumeroDentes {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: space-between;
+  padding: 0px;
+}
+.listaNumeroDentes .numero {
+  font-size: 15px;
+  height: 25px;
+  width: 25px;
+  margin: 1px;
+  text-align: center;
+  cursor: pointer;
+  color: rgb(54, 54, 54);
+  background-color: #f0f0f0;
+}
+
+.svg-icon.menu-icon.info {
+  margin-top: 2px;
+}
+
+.listaNumeroDentes .numero.ativo {
+  color: #fff;
+  background-color: #90c1f0;
+}
+
+.listaNumeroDentes .sessaoDente {
+  display: flex;
+  margin-bottom: 10px;
+  flex-basis: 50%;
+}
+
+.listaDentes {
+  padding: 10px;
+  overflow-y: auto;
+  height: 150px;
+  font-size: 15px;
+}
+.listaDentes li {
+  border-bottom: 1px dashed rgb(204, 204, 204);
+  display: flex;
+
+  padding: 10px 10px;
+
+  justify-content: space-between;
+}
+
+.listaDentes .numeroDenteSelecionado {
+  margin-right: 5px;
+}
+
+.listaDentes li .faces {
+  display: flex;
+}
+.listaDentes li .faces .face {
+  cursor: pointer;
+  border: 1px dashed rgb(3, 155, 229);
+
+  background-color: rgb(179, 229, 252);
+  font-weight: bold;
+  width: 16px;
+  text-align: center;
+  opacity: 0.3;
+}
+
+.listaDentes li .faces .face.ativo {
+  opacity: 1;
+}
+
+.card-orcamento .card-header {
+  background-color: rgb(36, 36, 36) !important ;
+}
+
+.card-orcamento .card-header .card-label {
+  color: #fff !important;
+}
+
+.orcamento {
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.todosOrcamentos {
+  width: 100%;
+  top: 0px;
+  bottom: 130px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.orcamento .conteudo {
+  width: 63%;
+}
+.orcamento.desabilitado {
+  filter: grayscale(1);
+}
+.orcamento .ativar {
+  width: 7%;
+  display: flex;
+  justify-content: center;
+}
+
+.orcamento .conteudo .linha {
+  border-bottom: 1px dashed rgb(204, 204, 204);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.orcamento .total {
+  width: 40%;
+  background-color: rgb(76, 175, 80);
+  height: 100%;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  line-height: calc(100%);
+  color: white;
+  text-align: center;
+  font-size: 22px;
+  align-items: center;
+  position: absolute;
+  padding: 0 10px;
+}
+
+.orcamento .total .texto {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.orcamento .total .acoes {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.acoes span {
+  cursor: pointer;
+}
+
+.acoes span:hover {
+  color: black;
+}
+.acoes span + span {
+  margin-left: 10px;
+}
+
+.selecaoDentes .gutter-b {
+  margin-bottom: 0px;
+}
+
+.btn-formapagamento {
+  padding: 5px;
+  color: rgb(25, 118, 210);
+  font-size: 15px;
+  cursor: pointer;
+}
+.btn-formapagamento:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transition-duration: 200ms;
+}
+
+.accordion .card .card-header {
+  cursor: pointer;
+  margin: 0;
+  border-bottom: 0;
+  padding: 20px !important;
+  background-color: #f3f6f9;
+}
+
+.fichaClinica .procedimento {
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+}
+
+.fichaClinica .procedimento:last-child {
+  margin-bottom: 0px;
+}
+.fichaClinica .listaProcedimentos {
+  padding: 10px;
+}
+
+.procedimento .statusProcedimento .aberto {
+  background-color: rgb(25, 118, 210);
+  width: 100%;
+  padding: 10px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+}

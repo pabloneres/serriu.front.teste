@@ -1,0 +1,208 @@
+@import '../vars';
+@import '../mixins/media';
+
+.template-default {
+
+	/* ============================================================================
+		Menu
+	============================================================================ */
+	.site-menu {
+		z-index:2;
+		&.ant-layout-sider {
+			overflow:auto;
+			position:fixed;
+			left:0;
+			height:100vh;
+			box-shadow:2px 0 6px rgba(0, 21, 41, 0.35);
+			scrollbar-width:thin;
+			scrollbar-color:#fff #001529;
+			&::-webkit-scrollbar {
+				width:6px;
+			}
+			&::-webkit-scrollbar-track {
+				background-color:#001529;
+				height:8px;
+			}
+			&::-webkit-scrollbar-thumb {
+				background-color:#fff;
+			}
+			&::-webkit-scrollbar-button {
+				display:none;
+			}
+		}
+		.logo {
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			padding:5px 15px;
+			height:64px;
+			background-color:#f4f4fa;
+			img {
+			}
+		}
+		.ant-menu-root {
+			> .ant-menu-item,
+			> .ant-menu-submenu {
+				&:first-child {
+					margin-top:0;
+				}
+				.anticon {
+					min-width:20px;
+					font-size:20px;
+					vertical-align:-5px;
+				}
+			}
+		}
+	}
+
+	/* ============================================================================
+		Header
+	============================================================================ */
+	.site-header {
+		z-index:1;
+		position:fixed;
+		top:0;
+		left:0;
+		right:0;
+		padding:0 20px;
+		background:#fff;
+		box-shadow:0 0 6px rgba(0, 21, 41, 0.2);
+		.trigger {
+			z-index:1;
+			position:absolute;
+			top:0;
+			left:0;
+			font-size:18px;
+			line-height:64px;
+			padding:0 24px;
+			cursor:pointer;
+			transition:color .3s;
+			&:hover {
+				color:#1890ff;
+			}
+		}
+		.inner {
+			display:flex;
+			justify-content:flex-end;
+			margin-left:auto;
+			margin-right:auto;
+			max-width:$grid-width;
+			text-align:right;
+			img {
+				max-width:50px;
+			}
+			.new-message {
+				margin-right:20px;
+				a {
+					display:flex;
+					align-items:center;
+					position:relative;
+					padding:0 10px;
+					height:100%;
+					i {
+						font-size:30px;
+					}
+					.ant-badge {
+						position:absolute;
+						top:10px;
+						right:0;
+					}
+				}
+			}
+			.user-dropdown {
+				display:inline-flex;
+				align-items:center;
+				cursor:pointer;
+				.ant-avatar {
+					margin-right:8px;
+					.anticon {
+						font-size:inherit;
+					}
+				}
+				> .anticon {
+					margin-left:3px;
+				}
+				.ant-spin {
+					margin-left:10px;
+				}
+			}
+		}
+	}
+
+	/* ============================================================================
+		Footer
+	============================================================================ */
+	.site-footer {
+		padding-left:20px;
+		padding-right:20px;
+		text-align:right;
+		.inner {
+			margin-left:auto;
+			margin-right:auto;
+			max-width:$grid-width;
+			img {
+				max-width:50px;
+			}
+		}
+	}
+
+	/* ============================================================================
+		Content
+	============================================================================ */
+	.site-content {
+		display:flex;
+		.site-content-inner {
+			flex:1;
+			margin-top:84px;
+			max-width:100%;
+			@include desktop {
+				padding-left:20px;
+				padding-right:20px;
+			}
+			.page-content {
+				margin-left:auto;
+				margin-right:auto;
+				width:100%;
+				max-width:$grid-width;
+				@include desktop_down {
+					padding:10px;
+				}
+			}
+		}
+	}
+
+}
+
+/* ============================================================================
+	Drawer
+============================================================================ */
+.template-default-ant-drawer {
+	z-index:2;
+	.ant-drawer-content-wrapper {
+		.ant-drawer-content {
+			background-color:#001529;
+			.ant-drawer-wrapper-body {
+				.ant-drawer-body {
+					padding:0;
+				}
+			}
+		}
+	}
+	.logo {
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		padding:5px 15px;
+		height:64px;
+		background-color:#f4f4fa;
+		img {
+		}
+	}
+	.ant-menu-root {
+		> .ant-menu-item {
+			&:first-child {
+				margin-top:0;
+			}
+		}
+	}
+}

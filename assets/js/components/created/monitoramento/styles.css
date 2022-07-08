@@ -1,0 +1,15 @@
+.disable_row {
+  background-color: #ededed;
+}
+
+.disable_row:hover {
+  background-color: unset;
+}
+
+.disable_actions {
+  pointer-events: none;
+}
+
+.enable {
+  color: rgb(77, 77, 77);
+}
