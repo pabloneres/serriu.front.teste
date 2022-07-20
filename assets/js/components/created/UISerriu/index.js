@@ -4,6 +4,7 @@ import UIButton from './Button'
 import UITable from './Table'
 import UIModal from './Modal'
 import UIPopover from './Popover'
+import UIDrawer from './Drawer'
 
 export {
 	UILoading,
@@ -11,5 +12,6 @@ export {
 	UIButton,
 	UITable,
 	UIModal,
-	UIPopover
+	UIPopover,
+	UIDrawer
 }

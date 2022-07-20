@@ -4,7 +4,7 @@ import { useHistory, Redirect, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SVG from 'react-inlinesvg'
 import { Link } from 'react-router-dom'
-import { index, destroy, store, update } from '~/controllers/controller'
+import { index, destroy, store, update } from '~/services/controller'
 import { toAbsoluteUrl, checkIsActive } from "~/_metronic/_helpers";
 import { Modal, Button, Form, Col, InputGroup } from 'react-bootstrap'
 import Select from 'react-select';
@@ -17,91 +17,94 @@ import {
 	CardHeaderToolbar,
 	CardBody,
 } from "~/_metronic/_partials/controls";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 function TabelaEspecialidade() {
-	const { params, url } = useRouteMatch()
-	const { token } = useSelector((state) => state.auth);
+	const {params, url}                       = useRouteMatch()
+	const {token}                             = useSelector((state) => state.auth);
 	const [especialidades, setEspecialidades] = useState([])
-	const [name, setName] = useState('')
-	const [logout, setLogout] = useState(false)
-	const [show, setShow] = useState(false);
-	const [showEdit, setShowEdit] = useState(false);
-	const [tableEdit, setTableEdit] = useState([]);
-	const [reload, setReload] = useState(false);
-	const history = useHistory();
+	const [name, setName]                     = useState('')
+	const [logout, setLogout]                 = useState(false)
+	const [show, setShow]                     = useState(false);
+	const [showEdit, setShowEdit]             = useState(false);
+	const [tableEdit, setTableEdit]           = useState([]);
+	const [reload, setReload]                 = useState(false);
+	const history                             = useHistory();
 
 	let initialValues = {
 		name: ''
 	}
 
-	const tabelaSchema = Yup.object().shape({
+	const tabelaSchema  = Yup.object().shape({
 		name: Yup.string()
-			.min(3, "Minimum 3 symbols")
-			.max(50, "Maximum 50 symbols")
-			.required('Campo obrigatorio!'),
+		.min(3, "Minimum 3 symbols")
+		.max(50, "Maximum 50 symbols")
+		.required('Campo obrigatorio!'),
 	});
 	const tabelaSchema2 = Yup.object().shape({
 		name: Yup.string()
-			.min(3, "Minimum 3 symbols")
-			.max(50, "Maximum 50 symbols")
-			.required('Campo obrigatorio!')
+		.min(3, "Minimum 3 symbols")
+		.max(50, "Maximum 50 symbols")
+		.required('Campo obrigatorio!')
 	});
 
 	const formik = useFormik({
 		initialValues,
 		validationSchema: tabelaSchema,
-		onSubmit: (values, { setStatus, setSubmitting, resetForm }) => {
-			store(token, '/especialidade', { ...values, can_edit: true })
-				.then(() => {
-					resetForm()
-					setShow(false)
-				})
-				.catch((err) => {
-					return
-					// retirar a linha debaixo e retornar o erro
-					// setSubmitting(false);
-				})
+		onSubmit        : (values, {setStatus, setSubmitting, resetForm}) => {
+			store('especialidade', {...values, can_edit: true})
+			.then(() => {
+				resetForm()
+				setShow(false)
+			})
+			.catch((err) => {
+				return
+				// retirar a linha debaixo e retornar o erro
+				// setSubmitting(false);
+			})
 		},
 	});
 
 	const formik2 = useFormik({
-		initialValues: {
+		initialValues     : {
 			name: tableEdit[1]
 		},
 		enableReinitialize: true,
-		validationSchema: tabelaSchema2,
-		onSubmit: (values, { setStatus, setSubmitting, resetForm }) => {
-			update(token, '/especialidade', tableEdit[0], values)
-				.then(() => {
-					resetForm()
-					setShowEdit(false)
-					setReload(!reload)
-				})
-				.catch((err) => {
-					return
-					// retirar a linha debaixo e retornar o erro
-					// setSubmitting(false);
-				})
+		validationSchema  : tabelaSchema2,
+		onSubmit          : (values, {setStatus, setSubmitting, resetForm}) => {
+			update('especialidade', tableEdit[0], values)
+			.then(() => {
+				resetForm()
+				setShowEdit(false)
+				setReload(!reload)
+			})
+			.catch((err) => {
+				return
+				// retirar a linha debaixo e retornar o erro
+				// setSubmitting(false);
+			})
 		},
 	});
 
 	useEffect(() => {
-		index(token, '/especialidade')
-			.then(({ data }) => {
-				setEspecialidades(data)
-			}).catch((err) => {
-				if (err.response.status === 401) {
-					setLogout(true)
-				}
-			})
+		index('especialidade')
+		.then(({data}) => {
+			setEspecialidades(data)
+		}).catch((err) => {
+			if( err.response.status === 401 )
+			{
+				setLogout(true)
+			}
+		})
 	}, [show, reload])
 
-	if (logout) {
+	if( logout )
+	{
 		return <Redirect to="/logout" />
 	}
 
 	function handleDelete(id) {
-		destroy(token, '/especialidade', id).then(() => {
+		destroy('especialidade', id).then(() => {
 			setReload(!reload)
 		})
 	}
@@ -118,9 +121,9 @@ function TabelaEspecialidade() {
 	return (
 		<Card>
 			<Modal show={show}
-				size="lg"
-				aria-labelledby="contained-modal-title-vcenter"
-				centered
+				   size="lg"
+				   aria-labelledby="contained-modal-title-vcenter"
+				   centered
 			>
 				<Modal.Header>Cadastrar especialidade</Modal.Header>
 				<Modal.Body>
@@ -162,9 +165,9 @@ function TabelaEspecialidade() {
 				</Modal.Body>
 			</Modal>
 			<Modal show={showEdit}
-				size="lg"
-				aria-labelledby="contained-modal-title-vcenter"
-				centered
+				   size="lg"
+				   aria-labelledby="contained-modal-title-vcenter"
+				   centered
 			>
 				<Modal.Header>Editar especialidade</Modal.Header>
 				<Modal.Body>
@@ -220,13 +223,13 @@ function TabelaEspecialidade() {
 			<CardBody>
 
 				<Table
-					style={{ marginTop: 10 }}
+					style={{marginTop: 10}}
 					striped bordered hover
 				>
 					<thead>
 						<tr>
 							<th>Nome</th>
-							<th style={{ "width": 100 }}>Ações</th>
+							<th style={{"width": 100}}>Ações</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -239,13 +242,13 @@ function TabelaEspecialidade() {
 											onClick={() => {
 												handleEdit(especialidade.id, especialidade.name)
 											}} className="svg-icon menu-icon">
-											<SVG style={{ "fill": "#3699ff", "color": "#3699ff" }} src={toAbsoluteUrl("/media/svg/icons/Design/create.svg")} />
+											<EditOutlined />
 										</span>
 									)}
 									{
 										especialidade.can_edit && (
-											<span onClick={() => handleDelete(especialidade.id)} style={{ "cursor": "pointer" }} className="svg-icon menu-icon">
-												<SVG style={{ "fill": "#3699ff", "color": "#3699ff", "marginLeft": 8 }} src={toAbsoluteUrl("/media/svg/icons/Design/delete.svg")} />
+											<span onClick={() => handleDelete(especialidade.id)} style={{"cursor": "pointer"}} className="svg-icon menu-icon">
+												<DeleteOutlined />
 											</span>
 										)
 									}

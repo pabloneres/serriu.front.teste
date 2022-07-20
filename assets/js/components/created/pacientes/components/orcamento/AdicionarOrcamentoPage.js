@@ -34,7 +34,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { store, index, update, show } from "~/controllers/controller";
+import { store, index, update, show } from "~/services/controller";
 import { index as indexNew } from "~/controllers/controller";
 import { convertMoney, convertDate } from "~/modules/Util";
 
@@ -43,9 +43,9 @@ import ProcedimentoGeral from "./components/formularios/procedimentoGeral";
 import ProcedimentoSelecaoDente from "./components/formularios/procedimentoSelecaoDente";
 
 import Select from "react-select";
+import Notify from "~/services/notify";
 
 function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
-  const { token } = useSelector(state => state.auth);
   const { selectedClinic, clinics } = useSelector(state => state.clinic);
   const history = useHistory();
   const { params, url } = useRouteMatch();
@@ -67,9 +67,6 @@ function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
   };
 
   const date_now = new Date();
-  const data = format(date_now, `dd/MM/yyyy HH:mm:ss`, {
-    timeZone: "America/Sao_Paulo"
-  });
 
   const [tabelas, setTabelas] = useState([]);
   const [tabela, setTabela] = useState(undefined);
@@ -98,24 +95,24 @@ function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
   const [defaultOrcamento, setDefaultOrcamento] = useState();
 
   useEffect(() => {
-    index(token, `/preco?id=${selectedClinic.id}`).then(({ data }) => {
+    index("preco", {id: selectedClinic.id}).then(({ data }) => {
       setTabelas(data);
     });
 
-    index(token, `/users?cargo=dentista&clinica=${selectedClinic.id}`).then(
+    index("users", {cargo: "dentista", clinica: selectedClinic.id}).then(
       ({ data }) => {
         setDentists(data);
       }
     );
-  }, [selectedClinic.id, token]);
+  }, [selectedClinic.id]);
 
   useEffect(() => {
     if (tabela) {
-      index(token, `/procedimento?id=${tabela}`).then(({ data }) => {
+      index("procedimento", {id: tabela}).then(({ data }) => {
         setProcedimentos(data);
       });
     }
-  }, [tabela, token]);
+  }, [tabela]);
 
   const handleSubmitFormaPagamento = e => {
     e.preventDefault();
@@ -233,7 +230,7 @@ function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
 
   function handleSubmit() {
     setLoading(true);
-    store(token, "/orcamentos", {
+    store("orcamentos", {
       procedimentos: procedimentosFinalizados,
       paciente_id: params.id,
       pagamento: opcoesPagamento,
@@ -244,12 +241,12 @@ function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
     })
       .then(() => {
         setLoading(false);
-        notify("Orçamento criado", "success", 1000);
+        Notify("success", "Orçamento criado");
         onFinish();
       })
       .catch(err => {
         setLoading(false);
-        notify("Erro ao criar orçamento", "error", 1000);
+		  Notify("error", "Erro ao criar orçamento");
         onFinish();
         return;
         // retirar a linha debaixo e retornar o erro
@@ -289,13 +286,13 @@ function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
   };
 
   useEffect(() => {
-    show(token, "defaultOrcamentos", selectedClinic.id).then(({ data }) => {
+    show("defaultOrcamentos", selectedClinic.id).then(({ data }) => {
       if (data) {
         // setDefaultOrcamento(true);
         setProcedimentosFinalizados(data.orcamento);
       }
     });
-  }, [selectedClinic.id, token]);
+  }, [selectedClinic.id]);
 
   const returnDisabled = () => {
     if (!dentista) {
@@ -346,7 +343,7 @@ function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
             {/* INSERE A DATA */}
             <Form.Group as={Col} controlId="formGridPassword">
               <Form.Label>Data *</Form.Label>
-              <Form.Control disabled type="text" name="data" value={data} />
+              <Form.Control disabled type="text" name="data" value={moment().format("LLL")} />
             </Form.Group>
           </Form.Row>
 

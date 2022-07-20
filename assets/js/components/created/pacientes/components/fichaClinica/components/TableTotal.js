@@ -3,176 +3,174 @@ import React, { useState, useEffect } from "react";
 // import { Container } from './styles';
 import { Table, Card, Button, Select, Tag } from "antd";
 import { convertMoney } from "~/modules/Util";
-import { index, store } from "~/controllers/controller";
+import { index, store } from "~/services/controller";
 import { useSelector } from "react-redux";
 
 function TableTotal({
-  orcamento,
-  especialidades,
-  executarProcedimento,
-  update
-}) {
-  const { token, user } = useSelector(state => state.auth);
-  const { selectedClinic } = useSelector(state => state.clinic);
-  const [dentistas, setDentistas] = useState([]);
-  const changeTitular = e => {
-    console.log({ ...e, orcamento_id: orcamento.id });
+						orcamento,
+						especialidades,
+						executarProcedimento,
+						update
+					}) {
+	const {token, user}             = useSelector(state => state.auth);
+	const {selectedClinic}          = useSelector(state => state.clinic);
+	const [dentistas, setDentistas] = useState([]);
+	const changeTitular             = e => {
+		console.log({...e, orcamento_id: orcamento.id});
 
-    store(token, "/fichaClinica/updateTitular", {
-      orcamento_id: orcamento.id,
-      especialidade_id: e.especialidade_id,
-      dentista_id: e.dentista_id
-    }).then(_ => {
-      update();
-    });
-  };
+		store("fichaClinica/updateTitular", {
+			orcamento_id    : orcamento.id,
+			especialidade_id: e.especialidade_id,
+			dentista_id     : e.dentista_id
+		}).then(_ => {
+			update();
+		});
+	};
 
-  const Extra = data => {
-    return (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        {/* <span style={{ marginRight: 20 }}>Total: {convertMoney(total)}</span> */}
-        <span style={{ color: "green", fontWeight: "bold", marginLeft: 20 }}>
+	const Extra = data => {
+		return (
+			<div style={{display: "flex", alignItems: "center"}}>
+				{/* <span style={{ marginRight: 20 }}>Total: {convertMoney(total)}</span> */}
+				<span style={{color: "green", fontWeight: "bold", marginLeft: 20}}>
           Total: {convertMoney(data.valor)}
         </span>
-        {/* <span style={{ color: 'green', fontWeight: 'bold' }}>: {convertMoney(data.saldo)}</span> */}
-        {/* <span style={{ color: "green", fontWeight: "bold", marginLeft: 20 }}>
+				{/* <span style={{ color: 'green', fontWeight: 'bold' }}>: {convertMoney(data.saldo)}</span> */}
+				{/* <span style={{ color: "green", fontWeight: "bold", marginLeft: 20 }}>
           Disponível Comissão: {convertMoney(data.saldoComissao)}
         </span> */}
-        <span style={{ color: "green", fontWeight: "bold", marginLeft: 20 }}>
+				<span style={{color: "green", fontWeight: "bold", marginLeft: 20}}>
           Saldo: {convertMoney(data.saldo)}
         </span>
-        {/* <Select onChange={(e) => changeTitular({
+				{/* <Select onChange={(e) => changeTitular({
           especialidade_id: data.especialidade_id,
           dentista_id: e
         })} options={dentistas} style={{ width: 250, marginLeft: 20 }} /> */}
-      </div>
-    );
-  };
+			</div>
+		);
+	};
 
-  useEffect(() => {
-    index(token, `users?cargo=dentista&clinica=${selectedClinic.id}`)
-      .then(({ data }) => {
-        setDentistas(
-          data.map(item => ({
-            ...item,
-            label: item.firstName + " " + item.lastName,
-            value: item.id
-          }))
-        );
-      })
-      .catch(err => {
-        if (err.response.status === 401) {
-        }
-      });
-  }, [selectedClinic.id, token]);
+	useEffect(() => {
+		index("users", {cargo: "dentista", clinica: selectedClinic.id})
+		.then(({data}) => {
+			setDentistas(
+				data.map(item => ({
+					...item,
+					label: item.firstName + " " + item.lastName,
+					value: item.id
+				}))
+			);
+		})
+		.catch(err => {
+		})
+	}, [selectedClinic.id]);
 
-  return (
-    <div>
-      {orcamento.especialidades.map((especi, index) => {
-        return (
-          <Card
-            key={index}
-            title={especi.especialidade.name}
-            extra={Extra({
-              total: especi.total,
-              valor: especi.valor,
-              restante: especi.restante,
-              saldoComissao: especi.saldoComissao,
-              saldo: especi.saldo,
-              dentistas,
-              especialidade_id: especi.especialidade_id
-            })}
-          >
-            <Table
-              rowKey="id"
-              columns={[
-                {
-                  title: "Dente",
-                  dataIndex: "dente",
-                  render: data => <span>{data ? data : "Geral"}</span>
-                },
-                {
-                  title: "Procedimento",
-                  dataIndex: "procedimento",
-                  render: data => <span>{data.name}</span>
-                },
-                {
-                  title: "Face",
-                  dataIndex: "faces",
-                  render: data => (
-                    <span>
+	return (
+		<div>
+			{orcamento.especialidades.map((especi, index) => {
+				return (
+					<Card
+						key={index}
+						title={especi.especialidade.name}
+						extra={Extra({
+							total           : especi.total,
+							valor           : especi.valor,
+							restante        : especi.restante,
+							saldoComissao   : especi.saldoComissao,
+							saldo           : especi.saldo,
+							dentistas,
+							especialidade_id: especi.especialidade_id
+						})}
+					>
+						<Table
+							rowKey="id"
+							columns={[
+								{
+									title    : "Dente",
+									dataIndex: "dente",
+									render   : data => <span>{data ? data : "Geral"}</span>
+								},
+								{
+									title    : "Procedimento",
+									dataIndex: "procedimento",
+									render   : data => <span>{data.name}</span>
+								},
+								{
+									title    : "Face",
+									dataIndex: "faces",
+									render   : data => (
+										<span>
                       {data
-                        ? data.map(item => {
-                            return (
-                              <span style={{ color: "red" }}>{item.label}</span>
-                            );
-                          })
-                        : "-"}
+						  ? data.map(item => {
+							  return (
+								  <span style={{color: "red"}}>{item.label}</span>
+							  );
+						  })
+						  : "-"}
                     </span>
-                  )
-                },
-                // {
-                //   title: 'Avaliador',
-                //   dataIndex: 'dentista',
-                //   render: (data) => <span>{data.firstName} {data.lastName}</span>,
-                // },
-                {
-                  title: "Titular",
-                  dataIndex: "titular",
-                  render: data =>
-                    data ? (
-                      <Select
-                        disabled
-                        value={data}
-                        options={dentistas}
-                        style={{ width: 250, marginLeft: 20 }}
-                      />
-                    ) : (
-                      <></>
-                    )
-                },
-                {
-                  title: "Valor procedimento",
-                  render: data => (
-                    <span>
+									)
+								},
+								// {
+								//   title: 'Avaliador',
+								//   dataIndex: 'dentista',
+								//   render: (data) => <span>{data.firstName} {data.lastName}</span>,
+								// },
+								{
+									title    : "Titular",
+									dataIndex: "titular",
+									render   : data =>
+										data ? (
+											<Select
+												disabled
+												value={data}
+												options={dentistas}
+												style={{width: 250, marginLeft: 20}}
+											/>
+										) : (
+											<></>
+										)
+								},
+								{
+									title : "Valor procedimento",
+									render: data => (
+										<span>
                       {convertMoney(data.desconto)}{" "}
-                      {data.negociacao &&
-                      data.negociacao.formaPagamento === "boleto" ? (
-                        <Tag color="purple">Boleto</Tag>
-                      ) : (
-                        ""
-                      )}
+											{data.negociacao &&
+											data.negociacao.formaPagamento === "boleto" ? (
+												<Tag color="purple">Boleto</Tag>
+											) : (
+												""
+											)}
                     </span>
-                  )
-                },
-                {
-                  width: 120,
-                  render: data => (
-                    <Button
-                      type="primary"
-                      disabled={
-                        data.status_execucao === "executado" ||
-                        !data.negociacao_id
-                      }
-                      onClick={e => executarProcedimento(e, orcamento, data)}
-                    >
-                      {data.status_execucao === "executado"
-                        ? "Executado"
-                        : !data.negociacao_id
-                        ? "Aguardando negociação"
-                        : "Executar"}
-                    </Button>
-                  )
-                }
-              ]}
-              dataSource={especi.procedimentos}
-              pagination={false}
-            />
-          </Card>
-        );
-      })}
-    </div>
-  );
+									)
+								},
+								{
+									width : 120,
+									render: data => (
+										<Button
+											type="primary"
+											disabled={
+												data.status_execucao === "executado" ||
+												!data.negociacao_id
+											}
+											onClick={e => executarProcedimento(e, orcamento, data)}
+										>
+											{data.status_execucao === "executado"
+												? "Executado"
+												: !data.negociacao_id
+													? "Aguardando negociação"
+													: "Executar"}
+										</Button>
+									)
+								}
+							]}
+							dataSource={especi.procedimentos}
+							pagination={false}
+						/>
+					</Card>
+				);
+			})}
+		</div>
+	);
 }
 
 export default TableTotal;

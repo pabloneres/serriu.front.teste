@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // General
 // -----------------------------------------------------------------------------
-// export const IS_DEBUG = process.env.NODE_ENV === 'development';
+export const IS_DEBUG = process.env.NODE_ENV === 'development';
 
 // -----------------------------------------------------------------------------
 // SideBar
@@ -11,7 +11,7 @@ export const SIDEBAR_DRAWER_MEDIA_QUERIE = "screen and (max-width: 1199px)";
 // -----------------------------------------------------------------------------
 // API
 // -----------------------------------------------------------------------------
-export const API_URL = "https://apidevelop.serriu.com.br/";
+export const API_URL = IS_DEBUG ? "http://127.0.0.1:3333/" : "https://apidevelop.serriu.com.br/";
 
 // -----------------------------------------------------------------------------
 // Errors
