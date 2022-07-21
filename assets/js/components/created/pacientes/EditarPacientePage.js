@@ -24,8 +24,9 @@ function EditarPacientePage(props) {
 	const {params} = useRouteMatch();
 	const history  = useHistory();
 
-	const [patient, setPatient] = useState({});
-	const [key, setKey]         = useState("orcamentos");
+	const [patient, setPatient]     = useState({});
+	const [key, setKey]             = useState("orcamentos");
+	const [propsMenu, setPropsMenu] = useState({})
 
 	const [reload, setReload]       = useState(false);
 	const [reloadTab, setReloadTab] = useState(false);
@@ -45,27 +46,36 @@ function EditarPacientePage(props) {
 		}
 	}, [query]);
 
+	const setMenu = (menu, props) => {
+		setPropsMenu({...props, [menu]: props})
+		setKey(menu)
+	}
+
+	// const getProps = () => {
+	// 	return propsMenu[key]
+	// }
+
 	const ReturnMenu = () => {
 		switch( key )
 		{
 			case "perfil":
-				return <Dados />;
+				return <Dados menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "upload":
-				return <Upload />;
+				return <Upload menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "orcamentos":
-				return <Orcamentos />;
+				return <Orcamentos menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "financeiro":
-				return <Financeiro />;
+				return <Financeiro menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "fichaClinica":
-				return <FichaClinica />;
+				return <FichaClinica menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "boletos":
-				return <Boletos />;
+				return <Boletos menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "agendamentos":
-				return <Agendamentos />;
+				return <Agendamentos menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "ortodontia":
-				return <Ortodontia />;
+				return <Ortodontia menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			default:
-				return <Dados />;
+				return <Dados menuActions={{setMenu, getProps: propsMenu[key]}} />;
 		}
 	};
 

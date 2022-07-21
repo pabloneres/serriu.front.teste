@@ -13,6 +13,7 @@ class UIDrawer extends Component {
 		btnSaveText       : PropTypes.any,
 		btnSaveTextSending: PropTypes.any,
 		modalProps        : PropTypes.object,
+		onSaveClick       : PropTypes.func
 	};
 
 	static defaultProps = {
@@ -47,7 +48,7 @@ class UIDrawer extends Component {
 	}
 
 	render() {
-		const {visible, formId, isLoading, isSending, width, title, showBtnSave, btnSaveTextSending, btnSaveText, modalProps} = this.props;
+		const {visible, formId, isLoading, isSending, width, title, showBtnSave, btnSaveTextSending, btnSaveText, modalProps, onSaveClick} = this.props;
 
 		return (
 			<Drawer
@@ -64,7 +65,7 @@ class UIDrawer extends Component {
 				footer={(
 					<div style={{width: "100%", display: "flex", justifyContent: "flex-end"}}>
 						<Button style={{marginRight: 10}} onClick={this.props.onClose} disabled={isLoading || isSending}>Cancelar</Button>
-						{showBtnSave && <Button type="primary" form={formId} htmlType="submit" className="btn-save" loading={isSending} disabled={isLoading}>{isSending ? btnSaveTextSending : btnSaveText}</Button>}
+						{showBtnSave && <Button type="primary" form={formId} onClick={onSaveClick} htmlType="submit" className="btn-save" loading={isSending} disabled={isLoading}>{isSending ? btnSaveTextSending : btnSaveText}</Button>}
 					</div>
 				)}
 				{...modalProps}>

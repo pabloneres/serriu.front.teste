@@ -13,6 +13,7 @@ class UIModal extends Component {
 		btnSaveText       : PropTypes.any,
 		btnSaveTextSending: PropTypes.any,
 		modalProps        : PropTypes.object,
+		showFooter        : PropTypes.bool
 	};
 
 	static defaultProps = {
@@ -47,12 +48,12 @@ class UIModal extends Component {
 	}
 
 	render() {
-		const {visible, formId, isLoading, isSending, width, title, showBtnSave, btnSaveTextSending, btnSaveText, modalProps} = this.props;
+		const {visible, formId, isLoading, isSending, width, title, showBtnSave, btnSaveTextSending, btnSaveText, modalProps, showFooter} = this.props;
 
 		return (
 			<Modal
 				visible={this.state.visible}
-				style={{top: 20}}
+				style={{top: 0}}
 				className="modal-form"
 				title={title}
 				width={width}
@@ -63,15 +64,15 @@ class UIModal extends Component {
 				onCancel={this.onClose}
 				onClose={this.onClose}
 				centered
-				footer={(
+				footer={showFooter ? (
 					<Fragment>
 						<Button className="btn-close" onClick={this.props.onClose} icon="close" disabled={isLoading || isSending}>Cancelar</Button>
 						{showBtnSave && <Button type="primary" form={formId} htmlType="submit" className="btn-save" icon="check" loading={isSending} disabled={isLoading}>{isSending ? btnSaveTextSending : btnSaveText}</Button>}
 					</Fragment>
-				)}
+				) : null}
 				{...modalProps}>
 				{isLoading ? (
-					<div className="text-center" style={{padding: 20}}>
+					<div className="text-center" style={{padding: 10}}>
 						<Spin />
 					</div>
 				) : this.props.children}

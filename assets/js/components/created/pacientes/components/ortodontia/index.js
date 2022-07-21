@@ -9,6 +9,7 @@ import Notify from "~/services/notify";
 import { connect } from "react-redux";
 import findById from "~/helpers/findById";
 import months from "~/helpers/months";
+import CreateOrcamento from "./createOrcamento"
 
 class Ortodontia extends Component {
 	constructor(props) {
@@ -39,7 +40,7 @@ class Ortodontia extends Component {
 					width    : "50%",
 					render   : (data) => (
 						<MonthRender onClick={() => this.onPressMonth(data)}>
-							{data}
+							{months[data].label}
 						</MonthRender>
 					)
 				},
@@ -100,62 +101,62 @@ class Ortodontia extends Component {
 			financeiroSeed      : [
 				{
 					day  : "20",
-					month: "Janeiro",
+					month: "jan",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Fereveiro",
+					month: "fev",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Março",
+					month: "mar",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Abril",
+					month: "abr",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Maio",
+					month: "mai",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Junho",
+					month: "jun",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Julho",
+					month: "jul",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Agosto",
+					month: "ago",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Setembro",
+					month: "set",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Outubro",
+					month: "out",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Novembro",
+					month: "nov",
 					value: 80
 				},
 				{
 					day  : "20",
-					month: "Dezembro",
+					month: "dez",
 					value: 80
 				},
 			],
@@ -203,14 +204,13 @@ class Ortodontia extends Component {
 	componentDidMount() {
 		// this.loadProcedimentos()
 		this.loadTabelaPreco()
-		// this.modal.onShow()
 	}
 
 	onPressMonth = (data) => {
 		this.setState({
 			month: data
 		})
-		this.drawer.onShow()
+		this.modal.onShow()
 	}
 
 	loadProcedimentos = () => {
@@ -317,63 +317,72 @@ class Ortodontia extends Component {
 							dataSource={ortodontiaSeed} />
 					</ContainerTable>
 				</div>
-				<UIDrawer
-					ref={el => this.drawer = el}
-					title="Criar orçamento"
-					btnSaveText="Salvar"
+				<UIModal
+					closable={false}
+					showFooter={false}
+					width="80%"
+					ref={el => this.modal = el}
 				>
-					<Form>
-						<Form.Item>
-							<Select
-								placeholder="Mês"
-								options={Object.keys(months).map((key, index) => ({
-									label: months[key].label,
-									value: months[key].value
-								}))}
-								value={this.state.month}
-								disabled
-							/>
-						</Form.Item>
-						<Form.Item>
-							<Select
-								placeholder="Tabela de preço"
-								options={this.state.tabelaPrecos?.map((item) => ({
-									label: item.name,
-									value: item.id
-								}))}
-								value={this.state.tabelaPreco}
-								onChange={this.changeTabelaPreco}
-							/>
-						</Form.Item>
-						<Form.Item>
-							<Select
-								placeholder="Procedimento"
-								options={this.state.procedimentos?.map((item) => ({
-									label: item.name,
-									value: item.id
-								}))}
-								value={this.state.procedimento}
-								onChange={this.changeProcedimento}
-							/>
-						</Form.Item>
-						<Button onClick={this.addProcedimento}>Adicionar</Button>
-						<UITable
-							style={{marginTop: 10}}
-							showHeader={false}
-							pagination={false}
-							size="small"
-							columns={columnsOrcamentoList}
-							dataSource={this.state.orcamentoList}
-							footer={() =>
-								<div style={{width: "100%", display: "flex", justifyContent: "space-between", backgroundColor: "#bbfff6"}}>
-									<span>Total</span>
-									<span>{convertMoney(this.state.orcamentoList.reduce((a, b) => a + b.valor, 0))}</span>
-								</div>
-							}
-						/>
-					</Form>
+					<CreateOrcamento month={this.state.month} />
+				</UIModal>
+				{/*<UIDrawer*/}
+				{/*	ref={el => this.drawer = el}*/}
+				{/*	title="Criar orçamento"*/}
+				{/*	btnSaveText="Salvar"*/}
+				{/*	onSaveClick={() => this.props.menuActions.setMenu("orcamentos", {showForm: true})}*/}
+				{/*>*/}
+				{/*	<Form>*/}
+				{/*		<Form.Item>*/}
+				{/*			<Select*/}
+				{/*				placeholder="Mês"*/}
+				{/*				options={Object.keys(months).map((key, index) => ({*/}
+				{/*					label: months[key].label,*/}
+				{/*					value: months[key].value*/}
+				{/*				}))}*/}
+				{/*				value={this.state.month}*/}
+				{/*				disabled*/}
+				{/*			/>*/}
+				{/*		</Form.Item>*/}
+				{/*		<Form.Item>*/}
+				{/*			<Select*/}
+				{/*				placeholder="Tabela de preço"*/}
+				{/*				options={this.state.tabelaPrecos?.map((item) => ({*/}
+				{/*					label: item.name,*/}
+				{/*					value: item.id*/}
+				{/*				}))}*/}
+				{/*				value={this.state.tabelaPreco}*/}
+				{/*				onChange={this.changeTabelaPreco}*/}
+				{/*			/>*/}
+				{/*		</Form.Item>*/}
+				{/*		<Form.Item>*/}
+				{/*			<Select*/}
+				{/*				placeholder="Procedimento"*/}
+				{/*				options={this.state.procedimentos?.map((item) => ({*/}
+				{/*					label: item.name,*/}
+				{/*					value: item.id*/}
+				{/*				}))}*/}
+				{/*				value={this.state.procedimento}*/}
+				{/*				onChange={this.changeProcedimento}*/}
+				{/*			/>*/}
+				{/*		</Form.Item>*/}
+				{/*		<Button onClick={this.addProcedimento}>Adicionar</Button>*/}
+				{/*		<UITable*/}
+				{/*			style={{marginTop: 10}}*/}
+				{/*			showHeader={false}*/}
+				{/*			pagination={false}*/}
+				{/*			size="small"*/}
+				{/*			columns={columnsOrcamentoList}*/}
+				{/*			dataSource={this.state.orcamentoList}*/}
+				{/*			footer={() =>*/}
+				{/*				<div style={{width: "100%", display: "flex", justifyContent: "space-between", backgroundColor: "#bbfff6"}}>*/}
+				{/*					<span>Total</span>*/}
+				{/*					<span>{convertMoney(this.state.orcamentoList.reduce((a, b) => a + b.valor, 0))}</span>*/}
+				{/*				</div>*/}
+				{/*			}*/}
+				{/*		/>*/}
+				{/*	</Form>*/}
 
-				</UIDrawer>
+				{/*</UIDrawer>*/}
 			</OrtodontiaContainer>
 		)
 	}
