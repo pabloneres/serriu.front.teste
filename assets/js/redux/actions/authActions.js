@@ -20,7 +20,6 @@ export const login = (data) => {
 			password: data.password,
 		})
 		.then((response) => {
-			console.log("AQUI", response.data)
 			const access_token = response.data.token;
 
 			// Update access_token from api instance
@@ -29,14 +28,14 @@ export const login = (data) => {
 			// Get user data
 			authService.getUserData().then((response) => {
 				dispatch(success({
-					access_token: access_token,
-					id          : response.data.id,
-					firstName  : response.data.firstName,
-					lastName   : response.data.lastName,
-					email       : response.data.email,
-					avatar      : response.data.avatar,
-					department_id      : response.data.department_id,
-					
+					access_token : access_token,
+					id           : response.data.id,
+					firstName    : response.data.firstName,
+					lastName     : response.data.lastName,
+					email        : response.data.email,
+					avatar       : response.data.avatar,
+					department_id: response.data.department_id,
+
 					// roles       : response.data.data.roles.map((role) => {
 					// 	return {
 					// 		id  : role.id,
@@ -136,11 +135,11 @@ export const refreshUserData = () => {
 		// Get user data
 		authService.getUserData().then((response) => {
 			dispatch(success({
-				firstName : response.data.firstName,
-				lastName  : response.data.lastName,
-				email      : response.data.email,
-				avatar     : response.data.avatar,
-				department_id     : response.data.department_id,
+				firstName    : response.data.firstName,
+				lastName     : response.data.lastName,
+				email        : response.data.email,
+				avatar       : response.data.avatar,
+				department_id: response.data.department_id,
 				// roles      : response.data.roles.map((role) => {
 				// 	return {
 				// 		id  : role.id,
