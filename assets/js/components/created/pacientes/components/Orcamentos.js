@@ -37,10 +37,9 @@ import {
 	store,
 	getProcedimentos,
 	orcamento,
-	destroy,
 	aprovar
 } from "~/controllers/orcamentoController";
-import { update, index, show } from "~/services/controller";
+import { update, index, show, destroy } from "~/services/controller";
 import moment, { locale } from "moment";
 import "moment/locale/pt-br";
 import OrcamentoPdf from "../../Pdf/Orcamento";
@@ -99,11 +98,9 @@ export function Orcamentos(props) {
 	}, [reload, activeKey, token, params.id]);
 
 	function handleDelete(id) {
-		destroy(token, id)
-		.then(() => {
-			setReload(!reload);
+		destroy("orcamentos", id).then((response) => {
+			setReload(!reload)
 		})
-		.catch(err => console.log(err));
 	}
 
 	function handleEdit(orcamento) {

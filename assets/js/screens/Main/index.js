@@ -27,7 +27,6 @@ class Main extends Component {
 						{ROUTES.map((route, i) => {
 							return (
 								<Route
-									
 									key={i}
 									exact={route?.exact ?? true}
 									path={route.path}

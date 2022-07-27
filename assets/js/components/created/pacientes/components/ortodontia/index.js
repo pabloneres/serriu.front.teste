@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { OrtodontiaContainer, ATable, MonthRender, DayRender, MonthPadding, ContainerTable, TitleTableContainer } from './styles.js'
+import { OrtodontiaContainer, ATable, MonthRender, DayRender, MonthPadding, ContainerTable, TitleTableContainer, FinanceiroRow } from './styles.js'
 import { UITable, UIModal, UIDrawer } from "~/components/created/UISerriu";
 import { Button, Form, Modal, Select } from 'antd'
 import { convertDate, convertMoney } from '~/modules/Util';
@@ -10,6 +10,9 @@ import { connect } from "react-redux";
 import findById from "~/helpers/findById";
 import months from "~/helpers/months";
 import CreateOrcamento from "./createOrcamento"
+import { PlusCircleOutlined } from "@ant-design/icons";
+
+const currentDate = new Date()
 
 class Ortodontia extends Component {
 	constructor(props) {
@@ -22,6 +25,7 @@ class Ortodontia extends Component {
 			procedimento        : null,
 			orcamentoList       : [],
 			month               : null,
+			selectedYear        : currentDate.getFullYear(),
 			columnsFinanceiro   : [
 				{
 					title    : "Dia",
@@ -98,68 +102,7 @@ class Ortodontia extends Component {
 					)
 				}
 			],
-			financeiroSeed      : [
-				{
-					day  : "20",
-					month: "jan",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "fev",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "mar",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "abr",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "mai",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "jun",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "jul",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "ago",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "set",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "out",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "nov",
-					value: 80
-				},
-				{
-					day  : "20",
-					month: "dez",
-					value: 80
-				},
-			],
+			financeiroList      : [],
 			ortodontiaSeed      : [
 				{
 					date        : "28/06/2022",
@@ -204,6 +147,7 @@ class Ortodontia extends Component {
 	componentDidMount() {
 		// this.loadProcedimentos()
 		this.loadTabelaPreco()
+		this.loadOrtos()
 	}
 
 	onPressMonth = (data) => {
@@ -211,6 +155,21 @@ class Ortodontia extends Component {
 			month: data
 		})
 		this.modal.onShow()
+	}
+
+	onPressAdd = (data) => {
+		// this.setState({
+		// 	month: data
+		// })
+		this.modal.onShow()
+	}
+
+	loadOrtos = () => {
+		index("ortodontia", {paciente_id: this.props.params.id}).then(({data}) => {
+			this.setState({
+				financeiroList: data
+			})
+		})
 	}
 
 	loadProcedimentos = () => {
@@ -274,9 +233,7 @@ class Ortodontia extends Component {
 
 	render() {
 
-		const {financeiroSeed, ortodontiaSeed, orcamentoList, columnsOrcamentoList} = this.state
-
-		console.log(orcamentoList)
+		const {financeiroSeed, ortodontiaSeed, orcamentoList, columnsOrcamentoList, selectedYear} = this.state
 
 		return (
 			<OrtodontiaContainer>
@@ -285,25 +242,68 @@ class Ortodontia extends Component {
 						<TitleTableContainer>
 							Financeiro
 						</TitleTableContainer>
-						<ATable
-							rowKey="month"
-							titleTable={
-								<div style={{padding: 5, display: "flex", flex: 1, justifyContent: "flex-start", alignItems: "center"}}>
-									<span style={{fontSize: 16, width: "25%"}}>Selecione o ano</span>
-									<Select
-										style={{width: "50%", textAlign: "center", borderRadius: 15}}
-									>
-										<option style={{textAlign: "center"}} value={2022}>2022</option>
-										<option style={{textAlign: "center"}} value={2023}>2023</option>
-									</Select>
-								</div>
+						{/*<ATable*/}
+						{/*	rowKey="month"*/}
+						{/*	titleTable={*/}
+						{/*		<div style={{padding: 5, display: "flex", flex: 1, justifyContent: "flex-start", alignItems: "center"}}>*/}
+						{/*			<span style={{fontSize: 16, width: "25%"}}>Ano</span>*/}
+						{/*			<Select*/}
+						{/*				style={{width: "50%", textAlign: "center", borderRadius: 15}}*/}
+						{/*				value={selectedYear}*/}
+						{/*				defaultValue={new Date().getFullYear()}*/}
+						{/*				onChange={(e) => this.setState({selectedYear: e})}*/}
+						{/*				options={[selectedYear, selectedYear + 1].map((item) => (*/}
+						{/*					{*/}
+						{/*						label: item,*/}
+						{/*						value: item*/}
+						{/*					}*/}
+						{/*				))}*/}
+						{/*			/>*/}
+						{/*		</div>*/}
+						{/*	}*/}
+						{/*	showHeader={false}*/}
+						{/*	styleWrapper={{width: '100%', borderRadius: 15, border: '1px solid #62C1D0', overflow: "hidden"}}*/}
+						{/*	size="small"*/}
+						{/*	columns={this.state.columnsFinanceiro} dataSource={financeiroSeed}*/}
+						{/*	pagination={false}*/}
+						{/*/>*/}
+						<div
+							style={{width: '100%', borderRadius: 15, border: '1px solid #62C1D0', overflow: "hidden", padding: 10, display: "flex", flexDirection: "column"}}
+						>
+							<div style={{padding: 5, display: "flex", flex: 1, justifyContent: "flex-start", alignItems: "center"}}>
+								<span style={{fontSize: 16, width: "25%"}}>Ano</span>
+								<Select
+									disabled
+									style={{width: "50%", textAlign: "center", borderRadius: 15}}
+									value={selectedYear}
+									defaultValue={new Date().getFullYear()}
+									onChange={(e) => this.setState({selectedYear: e})}
+									options={[selectedYear, selectedYear + 1].map((item) => (
+										{
+											label: item,
+											value: item
+										}
+									))}
+								/>
+							</div>
+							{
+								this.state.financeiroList.map((item, index) => (
+									<FinanceiroRow key={index}>
+										<div className="date-container"><DayRender>{convertDate(item.created_at)}</DayRender></div>
+										<div className="date-container"><MonthRender>{months[Number(item.mes)]?.label}</MonthRender></div>
+										<div className="date-container"><DayRender>{convertMoney(item.valor)}</DayRender></div>
+									</FinanceiroRow>
+								))
 							}
-							showHeader={false}
-							styleWrapper={{width: '100%', borderRadius: 15, border: '1px solid #62C1D0', overflow: "hidden"}}
-							size="small"
-							columns={this.state.columnsFinanceiro} dataSource={financeiroSeed}
-							pagination={false}
-						/>
+							<div style={{width: "100%", display: "flex", justifyContent: "center", marginTop: 20}}>
+								<PlusCircleOutlined
+									className="icon-plus"
+									style={{fontSize: 18}}
+									onClick={() => this.onPressAdd()}
+								/>
+							</div>
+						</div>
+
 					</ContainerTable>
 
 					<ContainerTable>
@@ -323,66 +323,11 @@ class Ortodontia extends Component {
 					width="80%"
 					ref={el => this.modal = el}
 				>
-					<CreateOrcamento month={this.state.month} />
+					<CreateOrcamento month={this.state.month} onFinish={() => {
+						this.loadOrtos()
+						this.modal.onClose()
+					}} />
 				</UIModal>
-				{/*<UIDrawer*/}
-				{/*	ref={el => this.drawer = el}*/}
-				{/*	title="Criar orçamento"*/}
-				{/*	btnSaveText="Salvar"*/}
-				{/*	onSaveClick={() => this.props.menuActions.setMenu("orcamentos", {showForm: true})}*/}
-				{/*>*/}
-				{/*	<Form>*/}
-				{/*		<Form.Item>*/}
-				{/*			<Select*/}
-				{/*				placeholder="Mês"*/}
-				{/*				options={Object.keys(months).map((key, index) => ({*/}
-				{/*					label: months[key].label,*/}
-				{/*					value: months[key].value*/}
-				{/*				}))}*/}
-				{/*				value={this.state.month}*/}
-				{/*				disabled*/}
-				{/*			/>*/}
-				{/*		</Form.Item>*/}
-				{/*		<Form.Item>*/}
-				{/*			<Select*/}
-				{/*				placeholder="Tabela de preço"*/}
-				{/*				options={this.state.tabelaPrecos?.map((item) => ({*/}
-				{/*					label: item.name,*/}
-				{/*					value: item.id*/}
-				{/*				}))}*/}
-				{/*				value={this.state.tabelaPreco}*/}
-				{/*				onChange={this.changeTabelaPreco}*/}
-				{/*			/>*/}
-				{/*		</Form.Item>*/}
-				{/*		<Form.Item>*/}
-				{/*			<Select*/}
-				{/*				placeholder="Procedimento"*/}
-				{/*				options={this.state.procedimentos?.map((item) => ({*/}
-				{/*					label: item.name,*/}
-				{/*					value: item.id*/}
-				{/*				}))}*/}
-				{/*				value={this.state.procedimento}*/}
-				{/*				onChange={this.changeProcedimento}*/}
-				{/*			/>*/}
-				{/*		</Form.Item>*/}
-				{/*		<Button onClick={this.addProcedimento}>Adicionar</Button>*/}
-				{/*		<UITable*/}
-				{/*			style={{marginTop: 10}}*/}
-				{/*			showHeader={false}*/}
-				{/*			pagination={false}*/}
-				{/*			size="small"*/}
-				{/*			columns={columnsOrcamentoList}*/}
-				{/*			dataSource={this.state.orcamentoList}*/}
-				{/*			footer={() =>*/}
-				{/*				<div style={{width: "100%", display: "flex", justifyContent: "space-between", backgroundColor: "#bbfff6"}}>*/}
-				{/*					<span>Total</span>*/}
-				{/*					<span>{convertMoney(this.state.orcamentoList.reduce((a, b) => a + b.valor, 0))}</span>*/}
-				{/*				</div>*/}
-				{/*			}*/}
-				{/*		/>*/}
-				{/*	</Form>*/}
-
-				{/*</UIDrawer>*/}
 			</OrtodontiaContainer>
 		)
 	}

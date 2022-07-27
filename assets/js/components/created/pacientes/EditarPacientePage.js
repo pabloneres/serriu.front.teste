@@ -73,7 +73,7 @@ function EditarPacientePage(props) {
 			case "agendamentos":
 				return <Agendamentos menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "ortodontia":
-				return <Ortodontia menuActions={{setMenu, getProps: propsMenu[key]}} />;
+				return <Ortodontia params={params} menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			default:
 				return <Dados menuActions={{setMenu, getProps: propsMenu[key]}} />;
 		}

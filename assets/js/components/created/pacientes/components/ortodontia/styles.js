@@ -34,11 +34,11 @@ export const TitleTableContainer = styled.div`
 `
 
 export const MonthRender = styled.div`
+	padding:2px 10px;
 	border-radius:8px;
 	border:1px solid #62C1D0;
 	color:#62C1D0;
 	font-weight:bold;
-	height:25px;
 	cursor:pointer;
 	&:hover {
 		background-color:#a7edfd;
@@ -58,4 +58,11 @@ export const DayRender = styled.div`
 		color:#62C1D0;
 		margin-right:5px;
 	}
+`
+
+export const FinanceiroRow = styled.div`
+	width:100%;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
 `

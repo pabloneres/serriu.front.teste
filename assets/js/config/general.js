@@ -11,15 +11,16 @@ export const SIDEBAR_DRAWER_MEDIA_QUERIE = "screen and (max-width: 1199px)";
 // -----------------------------------------------------------------------------
 // API
 // -----------------------------------------------------------------------------
-export const API_URL = IS_DEBUG ? "http://127.0.0.1:3333/" : "https://apidevelop.serriu.com.br/";
+// export const API_URL = "http://127.0.0.1:3333/"
+export const API_URL = "https://apidevelop.serriu.com.br/"
 
 // -----------------------------------------------------------------------------
 // Errors
 // -----------------------------------------------------------------------------
-export const API_ERRO_TYPE_VALIDATION = "validation";
-export const API_ERRO_TYPE_API = "api";
-export const API_ERRO_TYPE_SERVER = "server";
-export const API_ERRO_TYPE_CONNECTION = "connection";
-export const API_ERRO_TYPE_OTHER = "other";
+export const API_ERRO_TYPE_VALIDATION   = "validation";
+export const API_ERRO_TYPE_API          = "api";
+export const API_ERRO_TYPE_SERVER       = "server";
+export const API_ERRO_TYPE_CONNECTION   = "connection";
+export const API_ERRO_TYPE_OTHER        = "other";
 export const API_ERRO_TYPE_ACCESS_TOKEN = "access_token";
-export const API_ERRO_TYPE_CANCEL = "cancel";
+export const API_ERRO_TYPE_CANCEL       = "cancel";

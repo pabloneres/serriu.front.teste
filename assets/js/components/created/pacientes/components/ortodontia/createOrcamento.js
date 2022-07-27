@@ -43,7 +43,7 @@ import ProcedimentoSelecaoDente from "./components/formularios/procedimentoSelec
 import Select from "react-select";
 import Notify from "~/services/notify";
 
-function AdicionarOrcamentoPage({orcamento, alterar, onFinish, month}) {
+function CreateOrto({orcamento, alterar, onFinish, month}) {
 	const {selectedClinic, clinics}       = useSelector(state => state.clinic);
 	const history                         = useHistory();
 	const {params, url}                   = useRouteMatch();
@@ -77,15 +77,14 @@ function AdicionarOrcamentoPage({orcamento, alterar, onFinish, month}) {
 	const [clinicas, setClinicas]                                 = useState([]);
 	const [procedimentosFinalizados, setProcedimentosFinalizados] = useState([]);
 	const [dadosAPI, setDadosAPI]                                 = useState([]);
-
-	const [modalFormaPagamento, setModalFormaPagamento] = useState(false);
-
-	const [cobranca, setCobranca]   = useState({});
-	const [pagamento, setPagamento] = useState({});
-	const [condicao, setCondicao]   = useState({});
-	const [entrada, setEntrada]     = useState(undefined);
-	const [parcelas, setParcelas]   = useState(undefined);
-	const [showAlert, setShowAlert] = useState(false);
+	const [modalFormaPagamento, setModalFormaPagamento]           = useState(false);
+	const [mes, setMes]                                           = useState(Number(moment().format("MM")));
+	const [cobranca, setCobranca]                                 = useState({});
+	const [pagamento, setPagamento]                               = useState({});
+	const [condicao, setCondicao]                                 = useState({});
+	const [entrada, setEntrada]                                   = useState(undefined);
+	const [parcelas, setParcelas]                                 = useState(undefined);
+	const [showAlert, setShowAlert]                               = useState(false);
 
 	const [loading, setLoading] = useState(false);
 
@@ -250,7 +249,14 @@ function AdicionarOrcamentoPage({orcamento, alterar, onFinish, month}) {
 			status        : "salvo",
 			data_aprovacao: null
 		})
-		.then(() => {
+		.then((response) => {
+			return store("ortodontia", {
+				mes,
+				orcamento_id: response.data.id,
+				paciente_id : params.id,
+				valor       : response.data.valorDesconto,
+			})
+		}).then((response) => {
 			setLoading(false);
 			onFinish();
 			return Notify("success", "Orçamento criado");
@@ -319,7 +325,7 @@ function AdicionarOrcamentoPage({orcamento, alterar, onFinish, month}) {
 		}
 		return false;
 	};
-	console.log(month)
+
 	return (
 		<Card>
 			<CardHeader title="Adicionar Orcamento"></CardHeader>
@@ -332,8 +338,8 @@ function AdicionarOrcamentoPage({orcamento, alterar, onFinish, month}) {
 							<Form.Control
 								as="select"
 								name="mes"
-								disabled
-								value={months[month].value}
+								value={mes}
+								onChange={e => setMes(e.target.value)}
 							>
 								{
 									Object.keys(months).map((key, index) => <option key={months[key].value} value={months[key].value}>{months[key].label}</option>)
@@ -524,4 +530,4 @@ function AdicionarOrcamentoPage({orcamento, alterar, onFinish, month}) {
 	);
 }
 
-export default AdicionarOrcamentoPage;
+export default CreateOrto;
