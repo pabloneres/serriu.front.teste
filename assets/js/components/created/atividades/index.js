@@ -14,7 +14,6 @@ import { convertDate } from "~/modules/Util";
 import replaceNumber from "~/helpers/replaceNumber";
 import EditData from "~/components/created/atividades/editData";
 import EditDataPerson from "~/components/created/atividades/editDataPerson";
-import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import UIDropdown from "~/components/created/UISerriu/Dropdown";
 import locale from "antd/es/date-picker/locale/pt_BR";
 import notifications from "~/store/modules/notifications/reducer";

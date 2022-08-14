@@ -7,6 +7,7 @@ import { show } from "~/controllers/controller";
 import { Dados } from "./components/Dados";
 import Upload from "./components/Upload";
 import { Orcamentos } from "./components/Orcamentos";
+import Orcamento2 from "./components/orcamento2";
 import FichaClinica from "./components/fichaClinica";
 import Financeiro from "./components/financeiro/index";
 import Boletos from "./components/boletos";
@@ -64,6 +65,8 @@ function EditarPacientePage(props) {
 				return <Upload menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "orcamentos":
 				return <Orcamentos menuActions={{setMenu, getProps: propsMenu[key]}} />;
+			case "orcamentos2":
+				return <Orcamento2 params={params} menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "financeiro":
 				return <Financeiro menuActions={{setMenu, getProps: propsMenu[key]}} />;
 			case "fichaClinica":
@@ -92,6 +95,7 @@ function EditarPacientePage(props) {
 					<TabPane tab="Perfil" key="perfil" />
 					<TabPane tab="Upload" key="upload" />
 					<TabPane tab="Orçamentos" key="orcamentos" />
+					<TabPane tab="Orçamentos 2" key="orcamentos2" />
 					<TabPane tab="Financeiro" key="financeiro" />
 					<TabPane tab="Boletos" key="boletos" />
 					<TabPane tab="Ficha Clinica" key="fichaClinica" />

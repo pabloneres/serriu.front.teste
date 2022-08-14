@@ -25,7 +25,7 @@ import Extra from "../Extra";
 import { useSelector } from "react-redux";
 
 import { convertMoney, convertDate, currencyToInt } from "~/modules/Util";
-import { store, index, show, update } from "~/controllers/controller";
+import { store, index, show, update } from "~/services/controller";
 
 import { Table, Tooltip, Button, Select, Input, Spin, DatePicker } from "antd";
 import local from "antd/es/date-picker/locale/pt_BR";
@@ -35,7 +35,6 @@ import InputCurrency from "~/utils/Currency";
 
 function Negociacao({ data, paciente, close }) {
   const { selectedClinic } = useSelector(state => state.clinic);
-  const { token } = useSelector(state => state.auth);
 
   const [faturamento, setFaturamento] = useState(undefined);
   const [valorDistribuir, setValorDistribuir] = useState();
@@ -57,7 +56,7 @@ function Negociacao({ data, paciente, close }) {
   const [changeNegociacao, setChangeNegociacao] = useState(false);
 
   const getNegociacao = id => {
-    show(token, "/faturamento", id).then(({ data }) => {
+    show("/faturamento", id).then(({ data }) => {
       console.log(data);
       setFaturamento({
         ...data,
@@ -102,7 +101,7 @@ function Negociacao({ data, paciente, close }) {
       addEntrada
     };
 
-    update(token, "faturamento", faturamento.id, sendObject)
+    update("faturamento", faturamento.id, sendObject)
       .then(_ => {
         setLoadingButton(false);
         getNegociacao(faturamento.id);
@@ -115,7 +114,6 @@ function Negociacao({ data, paciente, close }) {
 
   const handleChangeNegociacao = () => {
     update(
-      token,
       "/negociacao_boleto/change",
       faturamento.negociacao_boleto.id,
       boletoParams
@@ -139,7 +137,7 @@ function Negociacao({ data, paciente, close }) {
       metodoPagamento
     };
 
-    update(token, "negociacao_boleto", faturamento.id, sendObject)
+    update("negociacao_boleto", faturamento.id, sendObject)
       .then(_ => {
         // return close()
       })
@@ -186,7 +184,7 @@ function Negociacao({ data, paciente, close }) {
       lab: labValue
     };
 
-    update(token, "faturamento", faturamento.id, sendObject)
+    update("faturamento", faturamento.id, sendObject)
       .then(_ => {
         setLoadingButton(false);
         getNegociacao(faturamento.id);

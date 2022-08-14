@@ -12,7 +12,6 @@ import { convertMoney, convertDate, currencyToInt } from "~/modules/Util";
 import { index, store, show, update } from "~/controllers/controller";
 
 function Negociacao({ negociacao, voltar }) {
-  const { token } = useSelector(state => state.auth);
   const { selectedClinic } = useSelector(state => state.clinic);
 
   const [loading, setLoading] = useState(false);

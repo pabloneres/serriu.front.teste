@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { OrtodontiaContainer, ATable, MonthRender, DayRender, MonthPadding, ContainerTable, TitleTableContainer, FinanceiroRow } from './styles.js'
 import { UITable, UIModal, UIDrawer } from "~/components/created/UISerriu";
-import { Button, Form, Modal, Select } from 'antd'
+import ModalExecutar from './modalExecutar'
+import { Button, Form, Modal, Select, Tooltip } from 'antd'
 import { convertDate, convertMoney } from '~/modules/Util';
 import { index } from "~/services/controller"
 import Notify from "~/services/notify";
@@ -10,7 +11,7 @@ import { connect } from "react-redux";
 import findById from "~/helpers/findById";
 import months from "~/helpers/months";
 import CreateOrcamento from "./createOrcamento"
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, ToolOutlined } from "@ant-design/icons";
 
 const currentDate = new Date()
 
@@ -63,7 +64,7 @@ class Ortodontia extends Component {
 			columnsOrtodontia   : [
 				{
 					title    : "Data",
-					dataIndex: "date",
+					dataIndex: "created_at",
 					render   : (data) => (
 						<MonthPadding>
 							{data}
@@ -75,8 +76,16 @@ class Ortodontia extends Component {
 					dataIndex: "arcoSuperior"
 				},
 				{
+					title    : "Tipo arco superior",
+					dataIndex: "tipoArcoSup"
+				},
+				{
 					title    : "Arco inferior",
 					dataIndex: "arcoInferior"
+				},
+				{
+					title    : "Tipo arco inferior",
+					dataIndex: "tipoArcoInf"
 				},
 				{
 					title    : "Braquetes",
@@ -85,6 +94,10 @@ class Ortodontia extends Component {
 				{
 					title    : "Profissional",
 					dataIndex: "dentist"
+				},
+				{
+					title    : "Ações",
+					render: (data) => <Tooltip title="Executar" ><Button onClick={() => this.modalExecutar.onOpen(data)} type="primary" icon={<ToolOutlined/>} /></Tooltip>
 				},
 			],
 			columnsOrcamentoList: [
@@ -103,44 +116,6 @@ class Ortodontia extends Component {
 				}
 			],
 			financeiroList      : [],
-			ortodontiaSeed      : [
-				{
-					date        : "28/06/2022",
-					arcoSuperior: "0.12",
-					arcoInferior: "0.12",
-					braquetes   : 5,
-					dentist     : "Pablo Neres"
-				},
-				{
-					date        : "28/06/2022",
-					arcoSuperior: "0.14",
-					arcoInferior: "0.14",
-					braquetes   : 2,
-					dentist     : "Pablo Neres"
-				},
-				{
-					date        : "28/06/2022",
-					arcoSuperior: "0.14",
-					arcoInferior: "0.14",
-					braquetes   : 2,
-					dentist     : "Pablo Neres"
-				},
-				{
-					date        : "28/06/2022",
-					arcoSuperior: "0.14",
-					arcoInferior: "0.14",
-					braquetes   : 2,
-					dentist     : "Pablo Neres"
-				},
-				{
-					date        : "28/06/2022",
-					arcoSuperior: "0.14",
-					arcoInferior: "0.14",
-					braquetes   : 2,
-					dentist     : "Pablo Neres"
-
-				},
-			]
 		}
 	}
 
@@ -242,31 +217,6 @@ class Ortodontia extends Component {
 						<TitleTableContainer>
 							Financeiro
 						</TitleTableContainer>
-						{/*<ATable*/}
-						{/*	rowKey="month"*/}
-						{/*	titleTable={*/}
-						{/*		<div style={{padding: 5, display: "flex", flex: 1, justifyContent: "flex-start", alignItems: "center"}}>*/}
-						{/*			<span style={{fontSize: 16, width: "25%"}}>Ano</span>*/}
-						{/*			<Select*/}
-						{/*				style={{width: "50%", textAlign: "center", borderRadius: 15}}*/}
-						{/*				value={selectedYear}*/}
-						{/*				defaultValue={new Date().getFullYear()}*/}
-						{/*				onChange={(e) => this.setState({selectedYear: e})}*/}
-						{/*				options={[selectedYear, selectedYear + 1].map((item) => (*/}
-						{/*					{*/}
-						{/*						label: item,*/}
-						{/*						value: item*/}
-						{/*					}*/}
-						{/*				))}*/}
-						{/*			/>*/}
-						{/*		</div>*/}
-						{/*	}*/}
-						{/*	showHeader={false}*/}
-						{/*	styleWrapper={{width: '100%', borderRadius: 15, border: '1px solid #62C1D0', overflow: "hidden"}}*/}
-						{/*	size="small"*/}
-						{/*	columns={this.state.columnsFinanceiro} dataSource={financeiroSeed}*/}
-						{/*	pagination={false}*/}
-						{/*/>*/}
 						<div
 							style={{width: '100%', borderRadius: 15, border: '1px solid #62C1D0', overflow: "hidden", padding: 10, display: "flex", flexDirection: "column"}}
 						>
@@ -314,7 +264,7 @@ class Ortodontia extends Component {
 							pagination={false}
 							styleWrapper={{paddingTop: 15, width: '100%', borderRadius: 15, border: '1px solid #62C1D0', overflow: "hidden"}}
 							size="small" columns={this.state.columnsOrtodontia}
-							dataSource={ortodontiaSeed} />
+							dataSource={this.state.financeiroList} />
 					</ContainerTable>
 				</div>
 				<UIModal
@@ -328,6 +278,10 @@ class Ortodontia extends Component {
 						this.modal.onClose()
 					}} />
 				</UIModal>
+				<ModalExecutar
+					ref={el => this.modalExecutar = el }
+				>
+				</ModalExecutar>
 			</OrtodontiaContainer>
 		)
 	}
@@ -345,7 +299,6 @@ const mapStateToProps = (state, ownProps) => {
 		settings     : state.settings,
 		agenda       : state.agenda,
 		notifications: state.notifications,
-
 	};
 };
 

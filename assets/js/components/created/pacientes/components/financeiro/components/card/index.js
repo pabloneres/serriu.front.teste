@@ -32,7 +32,6 @@ moment.locale("pt-br");
 
 function CardItem({ data, modal, loading, hascaixa }) {
   const { params } = useRouteMatch();
-  const { token } = useSelector(state => state.auth);
 
   if (!data) {
     return <></>;

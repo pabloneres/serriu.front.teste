@@ -128,7 +128,7 @@ function Resumo({ show, reload }) {
               rowClassName={rowClass}
             />
           </TabPane>
-          <TabPane tab="Resumo" key="resumo">
+          <TabPane tab="Fechamento" key="resumo">
             <Fechamento
               data={data}
               send={updateFechamento}

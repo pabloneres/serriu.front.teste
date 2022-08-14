@@ -1,0 +1,149 @@
+.orcamento-page {
+	.orcamento-row {
+		display:flex;
+	}
+
+	.table-edit {
+		.ant-table-thead {
+			tr > th {
+				background-color:transparent;
+			}
+		}
+	}
+
+	.render-procedimento {
+		position:relative;
+		border:1px solid #62C1D0;
+		border-radius:5px;
+		padding:10px;
+
+		display:flex;
+		flex-direction:column;
+
+		.title-procedimento {
+			color:#A0AEC0;
+			font-weight:500;
+			font-size:12px;
+		}
+
+		.infos-procedimento {
+			color:#A0AEC0;
+			font-weight:400;
+			font-size:12px;
+		}
+
+		.value-procedimento {
+			color:#62C1D0;
+			font-weight:700;
+			font-size:12px;
+		}
+
+		.delete-button {
+			position:absolute;
+			top:10px;
+			right:15px;
+
+			.anticon {
+				font-size:18px;
+				color:#62C1D0;
+			}
+		}
+	}
+
+}
+
+.container-side {
+	opacity:1;
+	width:49%;
+	max-height:100%;
+	padding:10px;
+	display:flex;
+	flex-direction:column;
+}
+
+.financeiro-drawer {
+
+	.orcamento-collapse {
+		flex:1;
+		display:flex;
+		justify-content:space-between;
+		flex-direction:row;
+
+		.container-footer {
+			display:flex;
+			justify-content:space-between;
+		}
+
+		.container-dashed {
+			margin-top:10px;
+			width:100%;
+			display:flex;
+			justify-content:space-between;
+			border:1px dashed #c4c4c4;
+			padding:5px;
+			flex-wrap:wrap;
+		}
+
+		.form-item {
+			border:#c4c4c4 1px dashed;
+			padding:5px;
+			display:flex;
+			width:100%;
+			flex-direction:column;
+		}
+
+		span.label-value {
+
+		}
+
+		span.value {
+
+		}
+
+	}
+
+	.procedimento-list {
+		height:calc(100vh - 192px);
+		overflow-y:auto;
+	}
+
+	.ant-drawer-body {
+		padding:10px !important;
+	}
+
+	.ant-drawer-footer {
+		padding:0;
+	}
+
+	.footer_drawer {
+		padding:20px 10px;
+		position:absolute;
+		width:100%;
+		background-color:#E8E8E8;
+		bottom:0;
+
+		color:#000 !important;
+
+		transition:all .3s;
+
+		&:hover {
+
+		}
+
+		.infos-pagamento {
+			.info {
+				h2 {
+					color:#000;
+				}
+			}
+		}
+
+		.header-pagamento {
+			h2 {
+				color:#000;
+			}
+		}
+
+	}
+
+}

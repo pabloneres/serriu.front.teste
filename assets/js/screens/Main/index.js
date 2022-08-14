@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ConfigProvider } from "antd";
+import Error from '~/screens/error'
 
 import pt_BR from "antd/es/locale/pt_BR"
 
@@ -65,6 +66,7 @@ class Main extends Component {
 								/>
 							)
 						})}
+						<Route component={Error} />
 					</Switch>
 				</BrowserRouter>
 			</ConfigProvider>

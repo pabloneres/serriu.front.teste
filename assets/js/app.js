@@ -7,7 +7,6 @@ import "moment/locale/pt-br";
 
 import { persistor, store } from "~/redux/store/configureStore";
 import Main from "../js/screens/Main";
-import "antd/dist/antd.css";
 import './index.css'
 
 class App extends Component {

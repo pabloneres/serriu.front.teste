@@ -1,72 +1,32 @@
 import { api } from "~/config/api";
 
 export function index(auth, params) {
-  if (!auth) {
-    return;
-  }
-  return api.get(`${params}`, {
-    headers: {
-      Authorization: "Bearer " + auth
-    }
-  });
+  return api.get(`${params}`)
 }
 
 export function show(auth, params, id) {
-  if (!auth) {
-    return;
-  }
-  return api.get(`${params}/${id}`, {
-    headers: {
-      Authorization: "Bearer " + auth
-    }
-  });
+  return api.get(`${params}/${id}`);
 }
 
 export function store(auth, params, data) {
-  if (!auth) {
-    return;
-  }
-  return api.post(params, data, {
-    headers: {
-      Authorization: "Bearer " + auth
-    }
-  });
+  return api.post(params, data);
 }
 
 export function update(auth, params, id, data) {
-  if (!auth) {
-    return;
-  }
-  return api.put(`${params}/${id}`, data, {
-    headers: {
-      Authorization: "Bearer " + auth
-    }
-  });
+  return api.put(`${params}/${id}`, data);
 }
 
 export function destroy(auth, params, id) {
-  if (!auth) {
-    return;
-  }
   // Authorization head should be fulfilled in interceptor.
-  return api.delete(`${params}/${id}`, {
-    headers: {
-      Authorization: "Bearer " + auth
-    }
-  });
+  return api.delete(`${params}/${id}`);
 }
 
 
 export function auth(data) {
-  return api.post('/sessions', data, {
-  });
+  return api.post('/sessions', data);
 }
 
 export async function profile(token) {
   // Authorization head should be fulfilled in interceptor.
-  return api.get('/profile', {
-    headers: {
-      Authorization: 'Bearer ' + token
-    }
-  })
+  return api.get('/profile')
 }

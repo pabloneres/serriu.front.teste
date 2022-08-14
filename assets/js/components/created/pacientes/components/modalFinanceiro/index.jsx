@@ -42,7 +42,7 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
-import { store, index, show } from "~/controllers/controller";
+import { store, index, show } from "~/services/controller";
 
 import { CheckCircleOutlined } from "@ant-design/icons";
 
@@ -65,7 +65,6 @@ const EditableContext = React.createContext(null);
 function ModalFinanceiro() {
   const { params, url } = useRouteMatch();
   const { selectedClinic } = useSelector(state => state.clinic);
-  const { token } = useSelector(state => state.auth);
 
   const [orcamento, setOrcamento] = useState();
   const [avaliador, setAvaliador] = useState();
@@ -116,7 +115,7 @@ function ModalFinanceiro() {
   const [loadingButton, setLoadingButton] = useState(false);
 
   useEffect(() => {
-    index(token, `/orcamentos/${params.id}?paciente=true&avaliador=true`).then(
+    index(`/orcamentos/${params.id}?paciente=true&avaliador=true`).then(
       async ({ data }) => {
         setOrcamento(data);
         setAvaliador(data.has_avaliador);
@@ -124,7 +123,7 @@ function ModalFinanceiro() {
         setProcedimentos(data.procedimentos);
       }
     );
-  }, [params.id, reload, token]);
+  }, [params.id, reload]);
 
   useEffect(() => {
     let arrEspecialidades = selecionado.map(item => {
@@ -227,14 +226,14 @@ function ModalFinanceiro() {
   ];
 
   const handlePagamento = () => {
-    store(token, "/pagamento", {
+    store("/pagamento", {
       condicao: "total",
       orcamento_id: params.id,
       // procedimento_ids: selecionado,
       formaPagamento,
       valor: Number(pagamentoValue),
       especialidades: especialidades
-    }).then(data => {
+    }).then(({data}) => {
       setPagamentoValue(0);
       setSaldoDistribuir([]);
       setPagamentoValue2(0);
@@ -253,7 +252,7 @@ function ModalFinanceiro() {
       boletoParams
     };
 
-    store(token, "pagamento_boleto", sendObject)
+    store("pagamento_boleto", sendObject)
       .then(_ => {
         return;
       })
@@ -404,7 +403,7 @@ function ModalFinanceiro() {
           : null
     };
 
-    store(token, "/negociacao", sendObject)
+    store("/negociacao", sendObject)
       .then(_ => {
         setLoadingButton(false);
         return;
@@ -447,7 +446,7 @@ function ModalFinanceiro() {
   };
 
   const getNegociacao = id => {
-    show(token, "/faturamento", id).then(({ data }) => {
+    show("/faturamento", id).then(({ data }) => {
       setFaturamento(data);
     });
   };

@@ -233,7 +233,7 @@ function CaixaPrincipal() {
             valueStyle={{ fontSize: 15 }}
             loading={!resumoMes}
             title="Saldo"
-            value={convertMoney(resumoMes.entrada - resumoMes.saida)}
+            value={convertMoney(resumoMes.entrada + resumoMes.saida)}
           />
           <Button type="primary" onClick={() => setShowModal(true)}>
             Adicionar

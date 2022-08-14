@@ -1,11 +1,23 @@
 .page-login {
 	.site-content {
-		.site-content-inner {
-			.page-content {
-				.ant-alert {
-					margin-bottom:20px;
-				}
+		width:600px;
+		margin:0 auto;
+
+		.recovery-password {
+			margin:10px;
+
+		}
+
+		.logo-container {
+			margin-top:100px;
+			margin-bottom:50px;
+			display:flex;
+			justify-content:center;
+
+			img {
+				margin:0 auto;
 			}
 		}
 	}
+
 }

@@ -12,11 +12,11 @@ import {
 	settingsReducer
 } from "./../reducers";
 
-const isDebuggingInChrome = process.env.NODE_ENV === "development";
+// const isDebuggingInChrome = process.env.NODE_ENV === "development";
 
 const persistConfig = {
-	key: "root",
-	storage: storage,
+	key      : "root",
+	storage  : storage,
 	whitelist: [
 		"auth",
 		"clinic",
@@ -27,20 +27,20 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-	auth: authReducer,
-	clinic: clinicReducer,
+	auth        : authReducer,
+	clinic      : clinicReducer,
 	notification: notificationReducer,
-	agenda: schedulerReducer,
-	settings: settingsReducer
+	agenda      : schedulerReducer,
+	settings    : settingsReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middleware = [thunk];
 
-if (isDebuggingInChrome) {
-	middleware.push(logger);
-}
+// if (isDebuggingInChrome) {
+// 	middleware.push(logger);
+// }
 
-export const store = createStore(persistedReducer, applyMiddleware(...middleware));
+export const store     = createStore(persistedReducer, applyMiddleware(...middleware));
 export const persistor = persistStore(store);

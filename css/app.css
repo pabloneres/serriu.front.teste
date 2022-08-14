@@ -78094,6 +78094,138 @@ img {
   color: #333;
 }
 
-.page-login .site-content .site-content-inner .page-content .ant-alert {
-  margin-bottom: 20px;
+.page-login .site-content {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.page-login .site-content .recovery-password {
+  margin: 10px;
+}
+
+.page-login .site-content .logo-container {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.page-login .site-content .logo-container img {
+  margin: 0 auto;
+}
+
+.orcamento-page .orcamento-row {
+  display: flex;
+}
+
+.orcamento-page .table-edit .ant-table-thead tr > th {
+  background-color: transparent;
+}
+
+.orcamento-page .render-procedimento {
+  position: relative;
+  border: 1px solid #62C1D0;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.orcamento-page .render-procedimento .title-procedimento {
+  color: #A0AEC0;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.orcamento-page .render-procedimento .infos-procedimento {
+  color: #A0AEC0;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.orcamento-page .render-procedimento .value-procedimento {
+  color: #62C1D0;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.orcamento-page .render-procedimento .delete-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.orcamento-page .render-procedimento .delete-button .anticon {
+  font-size: 18px;
+  color: #62C1D0;
+}
+
+.container-side {
+  opacity: 1;
+  width: 49%;
+  max-height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.financeiro-drawer .orcamento-collapse {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.financeiro-drawer .orcamento-collapse .container-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.financeiro-drawer .orcamento-collapse .container-dashed {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px dashed #c4c4c4;
+  padding: 5px;
+  flex-wrap: wrap;
+}
+
+.financeiro-drawer .orcamento-collapse .form-item {
+  border: #c4c4c4 1px dashed;
+  padding: 5px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.financeiro-drawer .procedimento-list {
+  height: calc(100vh - 192px);
+  overflow-y: auto;
+}
+
+.financeiro-drawer .ant-drawer-body {
+  padding: 10px !important;
+}
+
+.financeiro-drawer .ant-drawer-footer {
+  padding: 0;
+}
+
+.financeiro-drawer .footer_drawer {
+  padding: 20px 10px;
+  position: absolute;
+  width: 100%;
+  background-color: #E8E8E8;
+  bottom: 0;
+  color: #000 !important;
+  transition: all .3s;
+}
+
+.financeiro-drawer .footer_drawer .infos-pagamento .info h2 {
+  color: #000;
+}
+
+.financeiro-drawer .footer_drawer .header-pagamento h2 {
+  color: #000;
 }

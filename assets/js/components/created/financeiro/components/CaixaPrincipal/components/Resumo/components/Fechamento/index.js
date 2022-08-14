@@ -100,41 +100,6 @@ function Fechamento({ utils, send, data }) {
 
   return (
     <Container>
-      <Row>
-        {/* <MetodosContainer>
-          <ACard>
-            <ACardTitle>
-              <span>Valores informados</span>
-            </ACardTitle>
-            <ACardContent>
-              {metodos.map((item, index) => (
-                <ContainerMetodo key={index}>
-                  <MetodoName>{item.name}</MetodoName>
-                  <MetodoValue>{convertMoney(item.valor)}</MetodoValue>
-                </ContainerMetodo>
-              ))}
-            </ACardContent>
-          </ACard>
-        </MetodosContainer> */}
-
-        {/* <MetodosContainer>
-          <ACard>
-            <ACardTitle>
-              <span>Valores Reais</span>
-            </ACardTitle>
-            <ACardContent>
-              {Object.keys(utils.valoresReais).map(key => (
-                <ContainerMetodo key={key}>
-                  <MetodoName>{firstLetter(key)}</MetodoName>
-                  <MetodoValue>
-                    {convertMoney(utils.valoresReais[key])}
-                  </MetodoValue>
-                </ContainerMetodo>
-              ))}
-            </ACardContent>
-          </ACard>
-        </MetodosContainer> */}
-      </Row>
       <div>
         <ACard>
           <ACardTitle>
@@ -144,11 +109,6 @@ function Fechamento({ utils, send, data }) {
             pagination={false}
             size="small"
             columns={columns}
-            // dataSource={Object.keys(utils.byType).map(key => ({
-            //   name: firstLetter(key),
-            //   entrada: utils.byType[key][0],
-            //   saida: utils.byType[key][1]
-            // }))}
             dataSource={metodos.map(item => {
               return {
                 valorInformado: item.valor,
@@ -207,6 +167,34 @@ function Fechamento({ utils, send, data }) {
                     return previous + data.valores_informados[key];
                   },
                   0)
+                )}
+              />
+              <Statistic
+                style={{ marginLeft: 20 }}
+                valueStyle={{ fontSize: 15 }}
+                loading={!data}
+                title="Diferença"
+                value={convertMoney(
+
+                  
+                  Object.keys(data.valores_reais).reduce(function(
+                    previous,
+                    key
+                  ) {
+                    return previous + data.valores_reais[key];
+                  },
+                  0)
+                
+                    -
+
+                  Object.keys(data.valores_informados).reduce(function(
+                    previous,
+                    key
+                  ) {
+                    return previous + data.valores_informados[key];
+                  },
+                  0)
+
                 )}
               />
             </div>

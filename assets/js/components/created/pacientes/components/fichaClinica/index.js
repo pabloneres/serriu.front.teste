@@ -35,7 +35,7 @@ const {TextArea} = Input;
 
 function FichaClinica() {
 	// const classes = useStyles();
-	const {user}                      = useSelector(state => state.auth);
+	const {userData}                      = useSelector(state => state.auth);
 	const {selectedClinic}            = useSelector(state => state.clinic);
 	const {params, url}               = useRouteMatch();
 	const [orcamentos, setOrcamentos] = useState([]);
@@ -287,7 +287,7 @@ function FichaClinica() {
 						<FormRow columns={1}>
 							<Form.Item label="Profissional">
 								<Select
-									disabled={user.department_id === "dentista"}
+									disabled={userData.department_id === "dentista"}
 									options={dentistas}
 									value={dentista}
 									onChange={e => setDentista(e)}

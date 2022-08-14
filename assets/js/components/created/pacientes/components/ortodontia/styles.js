@@ -62,7 +62,6 @@ export const DayRender = styled.div`
 
 export const FinanceiroRow = styled.div`
 	width:100%;
-	display:flex;
-	flex-direction:row;
-	justify-content:space-between;
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr;
 `

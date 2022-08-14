@@ -1,0 +1,13 @@
+.ant_modal_edited {
+  max-height: 100vh;
+}
+
+.ant_modal_edited .ant-modal-body {
+  display: flex;
+  max-height: 100vh;
+  padding: 15px;
+}
+
+/* .ant_modal_edited .ant-table-cell {
+  padding: 8px;
+} */

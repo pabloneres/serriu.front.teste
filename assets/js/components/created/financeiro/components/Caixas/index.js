@@ -116,13 +116,13 @@ function Caixas() {
 					{data.status === 0 ? (
 						<Tooltip title="Abrir caixa">
 							<a onClick={() => setShowModalOpen(data.id)}>
-								<i class="fas fa-box-open"></i>
+								Abrir Caixa
 							</a>
 						</Tooltip>
 					) : (
 						<Tooltip title="Fechar caixa">
 							<a onClick={() => setShowModalClose(data.id)}>
-								<i class="fas fa-box"></i>
+								Fechar Caixa
 							</a>
 						</Tooltip>
 					)}

@@ -7,7 +7,7 @@ mix.options({
 });
 
 mix.webpackConfig({
-	resolve: {
+	resolve     : {
 		alias: {
 			'~': path.resolve(__dirname, 'assets/js/'),
 		}
@@ -74,7 +74,7 @@ mix
 	]
 });
 
-if( mix.inProduction() )
-{
-	mix.version();
-}
+// if( mix.inProduction() )
+// {
+// 	mix.version();
+// }

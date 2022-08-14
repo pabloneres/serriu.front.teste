@@ -32,7 +32,7 @@ const { TabPane } = Tabs;
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
 function Fluxo() {
-  const { token, user } = useSelector(state => state.auth);
+  const { token, userData: user } = useSelector(state => state.auth);
   const { selectedClinic } = useSelector(state => state.clinic);
 
   const [metodosPagamento, setMetodosPagamento] = useState([]);

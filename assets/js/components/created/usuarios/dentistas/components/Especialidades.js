@@ -10,7 +10,7 @@ import {
   Input,
   Form as FormNew
 } from "antd";
-import { index, destroy, store, update } from "~/controllers/controller";
+import { index, destroy, store, update } from "~/services/controller";
 import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 // import { Container } from './styles';
@@ -27,7 +27,6 @@ const { Option } = Select;
 
 export function Especialidades({ id }) {
   const { params, url } = useRouteMatch();
-  const { token } = useSelector(state => state.auth);
   const { selectedClinic } = useSelector(state => state.clinic);
   const [especialidade, setEspecialidade] = useState(undefined);
   const [especialidades, setEspecialidades] = useState([]);
@@ -39,7 +38,7 @@ export function Especialidades({ id }) {
   const [comissaoBoleto, setComissaoBoleto] = useState(undefined);
 
   useEffect(() => {
-    index(token, "especialidade").then(({ data }) => {
+    index("especialidade").then(({ data }) => {
       setEspecialidadesOptions(
         data.map(item => ({
           label: item.name,
@@ -49,20 +48,19 @@ export function Especialidades({ id }) {
 
       setLoading(false);
     });
-  }, [reload, token]);
+  }, [reload]);
 
   useEffect(() => {
     index(
-      token,
       `especialidade_config?clinica_id=${selectedClinic.id}&dentista_id=${id ||
         params.id}`
     ).then(({ data }) => {
       setEspecialidades(data);
     });
-  }, [id, params.id, selectedClinic.id, token, reload]);
+  }, [id, params.id, selectedClinic.id, reload]);
 
   const handleCreate = () => {
-    store(token, `/especialidade_config/${params.id}`, {
+    store(`/especialidade_config/${params.id}`, {
       clinica_id: selectedClinic.id,
       especialidade_id: especialidade,
       vista: comissaoVista,
@@ -77,7 +75,7 @@ export function Especialidades({ id }) {
   };
 
   const handleDelete = id => {
-    destroy(token, "especialidade_config", id).then(_ => {
+    destroy("especialidade_config", id).then(_ => {
       setEspecialidade();
       setReload(!reload);
       return Notify("success", "Sucesso", "Especialidade excluida");

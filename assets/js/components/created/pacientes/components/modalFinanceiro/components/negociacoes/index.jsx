@@ -12,7 +12,6 @@ import { index, store, show } from "~/controllers/controller";
 import Negociacao from "../negociacao";
 
 function Negociacoes({ negociacoes }) {
-  const { token } = useSelector(state => state.auth);
 
   const [negociacao, setNegociacao] = useState();
   const [loading, setLoading] = useState(false);

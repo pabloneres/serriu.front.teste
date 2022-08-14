@@ -76,10 +76,7 @@ function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
     ];
   };
 
-  const date_now = new Date();
-  const data = format(date_now, `dd/MM/yyyy HH:mm:ss`, {
-    timeZone: "America/Sao_Paulo"
-  });
+  const date_now = new Date()
 
   useEffect(() => {
     index(token, `/preco?id=${selectedClinic.id}`).then(({ data }) => {
@@ -279,7 +276,7 @@ function AdicionarOrcamentoPage({ orcamento, alterar, onFinish }) {
             onChange={(value, action) => {
               handlerMudancaProcedimentos(value, action);
             }}
-            isOptionDisabled={procedimentos}
+            // isOptionDisabled={procedimentos}
             isDisabled={!defaultOrcamento}
           />
         </Form.Item>

@@ -11,7 +11,7 @@ import {
   ResumoContainer
 } from './styles';
 
-import { store, show } from '~/controllers/controller'
+import { store, show } from '~/services/controller'
 
 import Currency from '~/utils/Currency/index'
 
@@ -34,9 +34,6 @@ const { Option } = Select
 
 function Boleto({ data, desconto, setDesconto, close }) {
 
-  console.log(data)
-
-  const { token } = useSelector(state => state.auth)
   const { selectedClinic } = useSelector(state => state.clinic)
 
   console.log(selectedClinic)
@@ -97,7 +94,7 @@ function Boleto({ data, desconto, setDesconto, close }) {
   const handleChangeValueEspecialidade = () => { }
 
   const handlePagamento = (gerar) => {
-    store(token, "/pagamento_boleto", {
+    store("/pagamento_boleto", {
       condicao: 'boleto',
       orcamento_id: data.id,
       formaPagamento: formaPagamento,
@@ -113,13 +110,13 @@ function Boleto({ data, desconto, setDesconto, close }) {
 
 
   useEffect(() => {
-    show(token, 'patient', data.paciente_id).then(({ data }) => {
+    show('patient', data.paciente_id).then(({ data }) => {
       setPaciente(data)
     })
-    show(token, 'users', data.avaliador).then(({ data }) => {
+    show('users', data.avaliador).then(({ data }) => {
       setDentista(data)
     })
-  }, [data, token])
+  }, [data])
 
   if (!data) {
     return (<></>)
@@ -143,7 +140,7 @@ function Boleto({ data, desconto, setDesconto, close }) {
   }
 
   const handleDesconto = () => {
-    store(token, '/permissaoCode', {
+    store('/permissaoCode', {
       passwordCode,
       orcamento_id: data.id,
       action: 'entrada',

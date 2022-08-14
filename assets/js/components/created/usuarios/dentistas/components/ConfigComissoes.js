@@ -3,7 +3,7 @@ import { useHistory, Redirect, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SVG from "react-inlinesvg";
 import { Link } from "react-router-dom";
-import { index, destroy, store, update, show } from "~/controllers/controller";
+import { index, destroy, store, update, show } from "~/services/controller";
 import { toAbsoluteUrl, checkIsActive } from "~/_metronic/_helpers";
 // import { Modal, Button, Col, InputGroup } from "react-bootstrap";
 import { useFormik } from "formik";
@@ -32,7 +32,6 @@ import "./styles.css";
 
 export function ConfigComissoes({ id }) {
   const { params, url } = useRouteMatch();
-  const { token } = useSelector(state => state.auth);
   const { selectedClinic } = useSelector(state => state.clinic);
   const { user } = useSelector(state => state.auth);
   const history = useHistory();
@@ -57,19 +56,17 @@ export function ConfigComissoes({ id }) {
 
   useEffect(() => {
     index(
-      token,
       `/comissao_config/${id || params.id}?clinica_id=${selectedClinic.id}`
     ).then(({ data }) => {
       setConfig(data);
     });
 
     index(
-      token,
       `especialidade_config?clinica_id=${selectedClinic.id}&dentista_id=${params.id}`
     ).then(({ data }) => {
       setEspecialidades(data);
     });
-  }, [id, params.id, reload, selectedClinic.id, token]);
+  }, [id, params.id, reload, selectedClinic.id]);
 
   // const updateConfig = (item) => {
   //   update(token, `/configuracao/comissao`, params.id, item).then((data) => {
@@ -79,7 +76,7 @@ export function ConfigComissoes({ id }) {
   // }
 
   const updateComissaoEspecialidade = id => {
-    update(token, `/especialidade/comissao`, id, editComissao).then(data => {
+    update(`/especialidade/comissao`, id, editComissao).then(data => {
       setEditComissao(undefined);
       setReload(!reload);
       Notify("success", "Sucesso", "Atualizado com sucesso");
@@ -88,7 +85,7 @@ export function ConfigComissoes({ id }) {
 
   const changeValue = e => {
     setLoading(true);
-    store(token, `comissao_config/${params.id}`, {
+    store(`comissao_config/${params.id}`, {
       ...e,
       clinica_id: selectedClinic.id
     }).then(data => {
@@ -100,7 +97,7 @@ export function ConfigComissoes({ id }) {
 
   const changeValueNoSend = e => {
     setLoading(true);
-    store(token, `comissao_config/${params.id}`, {
+    store(`comissao_config/${params.id}`, {
       vista,
       boleto,
       clinica_id: selectedClinic.id

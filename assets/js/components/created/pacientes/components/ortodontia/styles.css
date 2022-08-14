@@ -195,3 +195,8 @@
   color: rgb(255, 255, 255);
   margin-bottom: 20px;
 }
+
+.date-container {
+  display: flex;
+  justify-content: center;
+}

@@ -20,7 +20,7 @@ import { convertMoney, convertDate, currencyToInt } from "~/modules/Util";
 import { FormRow, Notify } from "~/modules/global";
 import { useSelector } from "react-redux";
 
-import { store, show } from "~/controllers/controller";
+import { store, show } from "~/services/controller";
 import { useRouteMatch } from "react-router-dom";
 
 import BoletoModal from "./components/boleto";
@@ -33,7 +33,6 @@ import { set } from "date-fns";
 import "../styles.css";
 
 function ModalPayment({ modal, setModal, close }) {
-  const { token } = useSelector(state => state.auth);
 
   const { params } = useRouteMatch();
 
@@ -69,8 +68,8 @@ function ModalPayment({ modal, setModal, close }) {
   }, [modal]);
 
   function update() {
-    show(token, "/orcamentos", modal.id).then(async ({ data }) => {
-      const paciente = await show(token, "/patient", params.id).then(
+    show("/orcamentos", modal.id).then(async ({ data }) => {
+      const paciente = await show("/patient", params.id).then(
         ({ data }) => {
           return data;
         }
@@ -88,7 +87,7 @@ function ModalPayment({ modal, setModal, close }) {
   const handleDesconto = () => {
     console.log(desconto);
     if (desconto) {
-      store(token, "/procedimentoExecucao/discount", {
+      store("/procedimentoExecucao/discount", {
         ...desconto,
         passwordCode
       })
@@ -138,7 +137,7 @@ function ModalPayment({ modal, setModal, close }) {
         visible={modal ? true : false}
         onClose={() => close()}
         onCancel={() => close()}
-        width={"100%"}
+        width={"80%"}
         footer={null}
       >
         {modal ? (

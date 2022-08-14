@@ -11,8 +11,6 @@ const Extra = ({ callback, disabled, value }) => {
   const { selectedClinic } = useSelector(state => state.clinic);
   const [condicao, setCondicao] = useState(undefined);
 
-  const { token } = useSelector(state => state.auth);
-
   const returnOptions = () => {
     if (selectedClinic.config.workBoletos) {
       return [
